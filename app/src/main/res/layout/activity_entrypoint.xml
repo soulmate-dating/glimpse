@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".root.MainActivity">
+    tools:context=".root.EntrypointActivity">
 
     <TextView
         android:id="@+id/information"
+        android:fontFamily="@font/along_sanss2_regular"
+        android:textSize="48sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
