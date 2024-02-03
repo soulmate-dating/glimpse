@@ -39,26 +39,25 @@ android {
 
 dependencies {
 
-    implementation(project(":common-navigation"))
-    implementation(project(":common-coroutines"))
+    // navigation
+    implementation("com.github.terrakok:cicerone:7.1")
 
+    // kotea
     implementation("ru.tinkoff.kotea:core:1.1.0")
     implementation("ru.tinkoff.kotea:android:1.1.0")
 
+    // viewbinding
     implementation("com.github.kirich1409:viewbindingpropertydelegate-full:1.5.9")
 
+    // di
     implementation("com.google.dagger:hilt-android:2.47")
     kapt("com.google.dagger:hilt-android-compiler:2.47")
 
+    // android
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
-    testImplementation("junit:junit:4.13.2")
-
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
 
 kapt {
