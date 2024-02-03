@@ -15,10 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "glimpse"
 include(":app")
-
-val sourcesPath = "./sources/"
-
-include(":common-navigation")
-project(":common-navigation").projectDir = file("${sourcesPath}common-navigation")
-include(":common-coroutines")
-project(":common-coroutines").projectDir = file("${sourcesPath}common-coroutines")
