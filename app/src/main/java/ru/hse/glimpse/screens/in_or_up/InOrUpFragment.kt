@@ -31,13 +31,15 @@ class InOrUpFragment : FlowFragment<InOrUpComponent>(R.layout.fragment_in_or_up)
         initViews()
     }
 
-    private fun initViews() {
-        binding.signUp.setOnClickListener { store.dispatch(InOrUpEvent.SingUpClicked) }
+    private fun initViews() = with(binding) {
+        signUp.setOnClickListener { store.dispatch(InOrUpEvent.SingUpClicked) }
+        signIn.setOnClickListener { store.dispatch(InOrUpEvent.SignInClicked) }
     }
 
     private fun handleNews(news: InOrUpNews) {
         when (news) {
             InOrUpNews.OpenSignUp -> router.navigateTo(Screens.SignUpScreen())
+            InOrUpNews.OpenSignIn -> router.navigateTo(Screens.LogInScreen())
         }
     }
 }

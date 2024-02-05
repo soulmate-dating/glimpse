@@ -7,6 +7,7 @@ internal class InOrUpUpdate : DslUpdate<InOrUpState, InOrUpEvent, InOrUpCommand,
     override fun NextBuilder.update(event: InOrUpEvent) {
         when (event) {
             is InOrUpEvent.SingUpClicked -> news(InOrUpNews.OpenSignUp)
+            is InOrUpEvent.SignInClicked -> news(InOrUpNews.OpenSignIn)
         }
     }
 }

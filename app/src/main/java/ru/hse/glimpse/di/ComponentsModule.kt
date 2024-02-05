@@ -8,6 +8,8 @@ import ru.hse.glimpse.screens.entrypoint.di.EntrypointComponent
 import ru.hse.glimpse.screens.entrypoint.di.EntrypointModule
 import ru.hse.glimpse.screens.in_or_up.di.InOrUpComponent
 import ru.hse.glimpse.screens.in_or_up.di.InOrUpModule
+import ru.hse.glimpse.screens.log_in.di.LogInComponent
+import ru.hse.glimpse.screens.log_in.di.LogInModule
 import ru.hse.glimpse.screens.sign_up.di.SignUpComponent
 import ru.hse.glimpse.screens.sign_up.di.SignUpModule
 
@@ -28,5 +30,10 @@ internal class ComponentsModule {
     @Provides
     fun provideSignUpComponent(): SignUpComponent {
         return object : SignUpComponent(), SignUpModule by SignUpModule() {}
+    }
+
+    @Provides
+    fun provideLogInComponent(): LogInComponent {
+        return object : LogInComponent(), LogInModule by LogInModule() {}
     }
 }
