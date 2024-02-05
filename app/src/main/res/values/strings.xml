@@ -3,4 +3,13 @@
 
     <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
+    <string name="create_account">Create account</string>
+
+    <string name="sign_up_description">Just a few quick thing to get started</string>
+    <string name="sign_in_description">Hello, welcome back</string>
+    <string name="sign_up_already_have_account">Already have an account? Log in</string>
+    <string name="sign_in_already_have_account">Don\'t have an account? Sign up</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

@@ -1,10 +1,11 @@
-package ru.hse.glimpse.screens.entrypoint
+package ru.hse.glimpse
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.AndroidEntryPoint
-import ru.hse.glimpse.R
+import ru.hse.glimpse.screens.entrypoint.EntrypointFragment
 import ru.hse.glimpse.utils.navigation.GlimpseAppNavigator
 import javax.inject.Inject
 
@@ -22,6 +23,11 @@ class EntrypointActivity : AppCompatActivity(R.layout.activity_entrypoint) {
     override fun onResumeFragments() {
         super.onResumeFragments()
         navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        window.statusBarColor = Color.TRANSPARENT
     }
 
     override fun onPause() {
