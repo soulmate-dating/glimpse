@@ -43,7 +43,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/along_sanss2_regular" />
+                android:fontFamily="@font/along_sanss2_regular"
+                android:imeOptions="actionNext"
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,7 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/along_sanss2_regular"
-                android:inputType="textPassword" />
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,9 +72,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="18sp"
             android:fontFamily="@font/along_sanss2_regular"
-            android:text="@string/create_account" />
+            android:text="@string/create_account"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/already_have_an_account"
