@@ -10,11 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Glimpse"
+        android:theme="@style/Transparent"
         android:name=".MainApplication"
         tools:targetApi="31">
         <activity
-            android:name=".screens.entrypoint.EntrypointActivity"
+            android:name=".EntrypointActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
