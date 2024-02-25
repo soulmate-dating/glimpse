@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -24,6 +27,10 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -34,6 +41,29 @@ android {
     }
     buildFeatures {
         viewBinding = true
+    }
+}
+
+tasks {
+    register<Exec>("buildAndSendApkToTelegram") {
+        dependsOn("assembleDebug")
+
+        val secretProperties = Properties()
+        val secretPropertiesFile = file("/Users/pa.medvedev/AndroidStudioProjects/glimpse/secret.properties")
+        if (secretPropertiesFile.exists()) {
+            secretProperties.load(FileInputStream(secretPropertiesFile))
+        }
+
+        val botToken = secretProperties["botToken"]
+        val chatID = secretProperties["chatID"]
+        val filePath = layout.projectDirectory.dir("./build/outputs/apk/debug/app-debug.apk").asFile.path
+
+        commandLine(
+            "curl",
+            "-F", "document=@$filePath",
+            "https://api.telegram.org/bot$botToken/sendDocument?chat_id=$chatID"
+        )
+//        commandLine("echo", "document=@$filePath")
     }
 }
 
