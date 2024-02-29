@@ -27,7 +27,7 @@ class EntrypointActivity : AppCompatActivity(R.layout.activity_entrypoint) {
 
     override fun onResume() {
         super.onResume()
-        window.statusBarColor = Color.TRANSPARENT
+        window.statusBarColor = Color.WHITE
     }
 
     override fun onPause() {
