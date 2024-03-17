@@ -18,7 +18,7 @@ internal class AuthenticationCommandHandler : EntrypointCommandsFlowHandler {
         return commands.filterIsInstance<EntrypointCommand.Authenticate>()
             .mapLatest {
                 runCatchingCancellable {
-                    delay(5000)
+                    delay(2000)
                     error("some error")
                 }
                     .map { EntrypointCommandResultEvent.AuthenticationPassed }
