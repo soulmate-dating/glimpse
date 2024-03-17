@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.hse.glimpse.screens.entrypoint.di.EntrypointComponent
 import ru.hse.glimpse.screens.entrypoint.di.EntrypointModule
+import ru.hse.glimpse.screens.fill_profile.di.FillProfileComponent
+import ru.hse.glimpse.screens.fill_profile.di.FillProfileModule
 import ru.hse.glimpse.screens.in_or_up.di.InOrUpComponent
 import ru.hse.glimpse.screens.in_or_up.di.InOrUpModule
 import ru.hse.glimpse.screens.log_in.di.LogInComponent
@@ -35,5 +37,10 @@ internal class ComponentsModule {
     @Provides
     fun provideLogInComponent(): LogInComponent {
         return object : LogInComponent(), LogInModule by LogInModule() {}
+    }
+
+    @Provides
+    fun provideFillProfileComponent(): FillProfileComponent {
+        return object : FillProfileComponent(), FillProfileModule by FillProfileModule() {}
     }
 }

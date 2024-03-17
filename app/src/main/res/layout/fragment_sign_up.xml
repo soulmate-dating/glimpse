@@ -2,8 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,12 +50,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/paswword"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="@string/password"
-            app:endIconMode="password_toggle">
+            android:hint="@string/password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -69,13 +67,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            style="@style/primaryButton"
             android:id="@+id/create_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/along_sanss2_regular"
-            android:text="@string/create_account"
-            android:textSize="18sp" />
+            android:text="@string/create_account" />
 
         <TextView
             android:id="@+id/already_have_an_account"

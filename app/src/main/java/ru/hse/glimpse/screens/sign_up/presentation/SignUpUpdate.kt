@@ -7,6 +7,19 @@ class SignUpUpdate : DslUpdate<SignUpState, SignUpEvent, SignUpCommand, SignUpNe
     override fun NextBuilder.update(event: SignUpEvent) {
         when (event) {
             is SignUpEvent.LogInClicked -> news(SignUpNews.OpenLogIn)
+            is SignUpEvent.CreateAccountClicked -> {
+                state { copy(isLoading = true) }
+                commands(SignUpCommand.SignUp(event.email, event.password))
+            }
+
+            is SignUpCommandResultEvent.CreateAccountSuccess -> {
+                state { copy(isLoading = false) }
+                news(SignUpNews.OpenFormFilling)
+            }
+            is SignUpCommandResultEvent.CreateAccountFailure -> {
+                state { copy(isLoading = false) }
+                news(SignUpNews.ShowError(event.message))
+            }
         }
     }
 }

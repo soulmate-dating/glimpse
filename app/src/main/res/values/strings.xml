@@ -13,4 +13,20 @@
 
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="fill_your_profile">Fill your profile</string>
+
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="birth_date">Birth date</string>
+    <string name="set">Set</string>
+    <string name="sex">Sex</string>
+    <string name="preferred_partner">Preference</string>
+    <string name="intention">Intention</string>
+    <string name="height">Height</string>
+    <string name="has_children">Has children</string>
+    <string name="family_plans">Family plans</string>
+    <string name="drinks_alcohol">Drinks alcohol</string>
+    <string name="smokes">Smokes</string>
+
+    <string name="save">Save</string>
 </resources>

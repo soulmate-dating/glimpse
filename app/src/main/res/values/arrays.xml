@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="sex">
+        <item>Male</item>
+        <item>Woman</item>
+    </array>
+    <array name="preferred_type">
+        <item>Male</item>
+        <item>Woman</item>
+        <item>Everyone</item>
+    </array>
+    <array name="intention">
+        <item>Life partner</item>
+        <item>Long-term relationships</item>
+        <item>Short-term relationships</item>
+        <item>Prefer not to say</item>
+    </array>
+    <array name="no_yes">
+        <item>No</item>
+        <item>Yes</item>
+    </array>
+    <array name="family_plans">
+        <item>Don\'t want children</item>
+        <item>Want children</item>
+        <item>Open to children</item>
+        <item>Not sure yet</item>
+        <item>Prefer not to say</item>
+    </array>
+    <array name="drinks_alcohol">
+        <item>Yes</item>
+        <item>Sometimes</item>
+        <item>No</item>
+        <item>Prefer not to say</item>
+    </array>
+    <array name="smokes">
+        <item>Yes</item>
+        <item>Sometimes</item>
+        <item>No</item>
+        <item>Prefer not to say</item>
+    </array>
+</resources>
