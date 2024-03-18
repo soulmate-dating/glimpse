@@ -63,7 +63,6 @@ tasks {
             "-F", "document=@$filePath",
             "https://api.telegram.org/bot$botToken/sendDocument?chat_id=$chatID"
         )
-//        commandLine("echo", "document=@$filePath")
     }
 }
 
@@ -71,6 +70,15 @@ dependencies {
 
     // navigation
     implementation("com.github.terrakok:cicerone:7.1")
+
+    // recycler
+    implementation("ru.tinkoff.mobile:ti-recycler-coroutines:2.2.1")
+
+    // coil
+    implementation("io.coil-kt:coil:2.6.0")
+
+    // shimmers
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 
     // kotea
     implementation("ru.tinkoff.kotea:core:1.1.0")

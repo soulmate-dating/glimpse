@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import ru.hse.glimpse.screens.chats.di.ChatsComponent
+import ru.hse.glimpse.screens.chats.di.ChatsModule
 import ru.hse.glimpse.screens.entrypoint.di.EntrypointComponent
 import ru.hse.glimpse.screens.entrypoint.di.EntrypointModule
 import ru.hse.glimpse.screens.fill_profile.di.FillProfileComponent
@@ -42,5 +44,10 @@ internal class ComponentsModule {
     @Provides
     fun provideFillProfileComponent(): FillProfileComponent {
         return object : FillProfileComponent(), FillProfileModule by FillProfileModule() {}
+    }
+
+    @Provides
+    fun provideChatsComponent(): ChatsComponent {
+        return object : ChatsComponent(), ChatsModule by ChatsModule() {}
     }
 }
