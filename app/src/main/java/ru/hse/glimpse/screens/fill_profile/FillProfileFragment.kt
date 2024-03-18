@@ -1,16 +1,16 @@
 package ru.hse.glimpse.screens.fill_profile
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.RequiresApi
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import ru.hse.glimpse.R
 import ru.hse.glimpse.databinding.FragmentFillProfileBinding
+import ru.hse.glimpse.navigation.Screens
 import ru.hse.glimpse.screens.fill_profile.di.FillProfileComponent
 import ru.hse.glimpse.screens.fill_profile.presentation.FillProfileNews
+import ru.hse.glimpse.screens.fill_profile.presentation.FillProfileUiEvent
 import ru.hse.glimpse.utils.views.FlowFragment
 import ru.tinkoff.kotea.android.lifecycle.collectOnCreate
 import ru.tinkoff.kotea.android.storeViaViewModel
@@ -24,7 +24,6 @@ class FillProfileFragment : FlowFragment<FillProfileComponent>(R.layout.fragment
 
     private val store by storeViaViewModel { component.createFillProfileStore() }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         store.collectOnCreate(
@@ -45,15 +44,18 @@ class FillProfileFragment : FlowFragment<FillProfileComponent>(R.layout.fragment
                 val selectedDate = datePicker.selection
 
                 val formattedDate = dateFormat.format(selectedDate)
-                println(formattedDate)
                 binding.date.editText?.setText(formattedDate)
             }
+        }
 
-            println(binding.hasChildren.editText?.text)
+        binding.saveButton.setOnClickListener {
+            store.dispatch(FillProfileUiEvent.SaveClicked)
         }
     }
 
     private fun handleNews(news: FillProfileNews) {
-        TODO("Not yet implemented")
+        when (news) {
+            is FillProfileNews.OpenChatsScreen -> router.newRootChain(Screens.ChatsScreen())
+        }
     }
 }

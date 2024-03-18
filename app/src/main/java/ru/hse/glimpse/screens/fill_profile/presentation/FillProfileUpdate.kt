@@ -5,6 +5,8 @@ import ru.tinkoff.kotea.core.dsl.DslUpdate
 class FillProfileUpdate : DslUpdate<FillProfileState, FillProfileEvent, FillProfileCommand, FillProfileNews>() {
 
     override fun NextBuilder.update(event: FillProfileEvent) {
-        TODO("Not yet implemented")
+        when (event) {
+            is FillProfileUiEvent.SaveClicked -> news(FillProfileNews.OpenChatsScreen)
+        }
     }
 }
