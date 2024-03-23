@@ -36,7 +36,7 @@ class InOrUpUpdateTest : BehaviorSpec({
                 actualNext.news
                     .shouldBeSingleton()
                     .first()
-                    .shouldBeInstanceOf<InOrUpNews.OpenSignIn>()
+                    .shouldBeInstanceOf<InOrUpNews.OpenSignUp>()
             }
         }
     }
