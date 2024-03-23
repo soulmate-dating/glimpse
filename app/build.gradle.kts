@@ -8,6 +8,13 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
+@Suppress("UnstableApiUsage")
+android.testOptions {
+    unitTests.all {
+        it.useJUnitPlatform()
+    }
+}
+
 android {
     namespace = "ru.hse.glimpse"
     compileSdk = 34
@@ -97,6 +104,10 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    // unit testing
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.8.0")
 }
 
 kapt {
