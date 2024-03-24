@@ -76,9 +76,7 @@ class SignUpFragment : FlowFragment<SignUpComponent>(R.layout.fragment_sign_up) 
             is SignUpNews.OpenFormFilling -> {
                 router.newRootChain(Screens.FillProfileScreen())
             }
-            is SignUpNews.ShowError -> {
-                binding.showAlert(news.message)
-            }
+            is SignUpNews.ShowError -> showAlert(news.message)
         }
     }
 }

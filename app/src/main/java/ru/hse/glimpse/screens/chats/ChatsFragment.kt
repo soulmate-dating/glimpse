@@ -68,8 +68,16 @@ class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
     }
 
     private fun render(state: ChatsUiState) {
+        controlShimmersVisibility(isLoading = state.isLoading)
         recycler.setItems(state.items)
-        if (state.isLoading) {
+    }
+
+    private fun handleNews(news: ChatsNews) {
+        TODO("Not yet implemented")
+    }
+
+    private fun controlShimmersVisibility(isLoading: Boolean) {
+        if (isLoading) {
             binding.shimmers.startShimmer()
         } else {
             binding.shimmers.apply {
@@ -78,9 +86,5 @@ class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
             }
             binding.recycler.visibility = View.VISIBLE
         }
-    }
-
-    private fun handleNews(news: ChatsNews) {
-        TODO("Not yet implemented")
     }
 }

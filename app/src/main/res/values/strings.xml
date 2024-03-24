@@ -29,4 +29,6 @@
     <string name="smokes">Smokes</string>
 
     <string name="save">Save</string>
+
+    <string name="sample_error_message">Something went wrong</string>
 </resources>
