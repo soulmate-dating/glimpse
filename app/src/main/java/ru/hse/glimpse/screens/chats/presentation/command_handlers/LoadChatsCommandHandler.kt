@@ -7,8 +7,9 @@ import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.mapLatest
 import ru.hse.glimpse.screens.chats.model.Chat
 import ru.hse.glimpse.screens.chats.presentation.ChatsCommand
+import ru.hse.glimpse.screens.chats.presentation.ChatsCommandResultEvent.ChatsError
 import ru.hse.glimpse.screens.chats.presentation.ChatsEvent
-import ru.hse.glimpse.screens.chats.presentation.ChatsEvent.ChatsLoaded
+import ru.hse.glimpse.screens.chats.presentation.ChatsCommandResultEvent.ChatsLoaded
 import ru.hse.glimpse.utils.coroutines.runCatchingCancellable
 import ru.tinkoff.kotea.core.CommandsFlowHandler
 
@@ -22,7 +23,7 @@ class LoadChatsCommandHandler : CommandsFlowHandler<ChatsCommand, ChatsEvent> {
                     getChats()
                 }
                     .map(::ChatsLoaded)
-                    .getOrElse { ChatsEvent.ChatsError(throwable = it) }
+                    .getOrElse(::ChatsError)
             }
     }
 

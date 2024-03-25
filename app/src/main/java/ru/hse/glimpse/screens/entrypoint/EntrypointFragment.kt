@@ -27,7 +27,7 @@ class EntrypointFragment : FlowFragment<EntrypointComponent>(R.layout.fragment_e
 
     private fun handleNews(news: EntrypointNews) {
         when (news) {
-            is EntrypointNews.OpenInOrUpScreen -> router.newRootChain(Screens.InOrUpScreen())
+            is EntrypointNews.OpenInOrUpScreen -> router.newRootChain(Screens.ChatsScreen())
         }
     }
 }
