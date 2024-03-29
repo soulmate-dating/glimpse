@@ -14,6 +14,8 @@ import ru.hse.glimpse.screens.in_or_up.di.InOrUpComponent
 import ru.hse.glimpse.screens.in_or_up.di.InOrUpModule
 import ru.hse.glimpse.screens.log_in.di.LogInComponent
 import ru.hse.glimpse.screens.log_in.di.LogInModule
+import ru.hse.glimpse.screens.main.di.MainComponent
+import ru.hse.glimpse.screens.main.di.MainModule
 import ru.hse.glimpse.screens.sign_up.di.SignUpComponent
 import ru.hse.glimpse.screens.sign_up.di.SignUpModule
 
@@ -22,7 +24,7 @@ import ru.hse.glimpse.screens.sign_up.di.SignUpModule
 internal class ComponentsModule {
 
     @Provides
-    fun provideMainComponent(): EntrypointComponent {
+    fun provideEntrypointComponent(): EntrypointComponent {
         return object : EntrypointComponent(), EntrypointModule by EntrypointModule() {}
     }
 
@@ -49,5 +51,10 @@ internal class ComponentsModule {
     @Provides
     fun provideChatsComponent(): ChatsComponent {
         return object : ChatsComponent(), ChatsModule by ChatsModule() {}
+    }
+
+    @Provides
+    fun provideMainComponent(): MainComponent {
+        return object : MainComponent(), MainModule by MainModule() {}
     }
 }

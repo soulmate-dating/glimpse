@@ -12,13 +12,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="Matches" />
+        app:title="Leo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:background="#F3F3F3"
+        android:clipToPadding="false"
+        android:paddingVertical="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,17 +39,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#F3F3F3"
             android:orientation="vertical"
+            android:paddingTop="8dp"
             app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-            <include layout="@layout/shimmer_item_chat" />
+            <include layout="@layout/shimmer_item_main_prompts" />
 
-            <include layout="@layout/shimmer_item_chat" />
+            <include layout="@layout/shimmer_item_main_prompts" />
 
-            <include layout="@layout/shimmer_item_chat" />
+            <include layout="@layout/shimmer_item_main_prompts" />
+
+            <include layout="@layout/shimmer_item_main_prompts" />
 
         </LinearLayout>
 

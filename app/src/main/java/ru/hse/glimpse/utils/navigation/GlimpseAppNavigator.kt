@@ -21,11 +21,11 @@ class GlimpseAppNavigator(
         currentFragment: Fragment?,
         nextFragment: Fragment
     ) {
-        fragmentTransaction.setCustomAnimations(
-            R.anim.enter_from_right,
-            R.anim.exit_to_left,
-            R.anim.pop_enter_from_left,
-            R.anim.pop_exit_to_right
-        )
+//        fragmentTransaction.setCustomAnimations(
+//            R.anim.enter_from_right,
+//            R.anim.exit_to_left,
+//            R.anim.pop_enter_from_left,
+//            R.anim.pop_exit_to_right
+//        )
     }
 }
