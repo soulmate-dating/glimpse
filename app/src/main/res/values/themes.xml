@@ -53,6 +53,10 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="text_body_s" parent="text">
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="primaryButton" parent="TextAppearance.AppCompat.Widget.Button.Colored">
         <item name="android:height">54dp</item>
         <item name="android:textSize">18sp</item>

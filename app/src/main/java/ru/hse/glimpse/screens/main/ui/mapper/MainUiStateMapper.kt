@@ -28,7 +28,7 @@ class MainUiStateMapper : UiStateMapper<MainState, MainUiState> {
 
     private fun getImagePromptItem(prompt: Prompt): ImagePromptItem {
         return ImagePromptItem(
-            content = prompt.content,
+            question = prompt.content,
             imageLink = prompt.imageLink,
         )
     }

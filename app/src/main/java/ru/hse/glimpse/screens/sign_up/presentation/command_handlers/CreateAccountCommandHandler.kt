@@ -22,7 +22,6 @@ class CreateAccountCommandHandler(
     private val userInfoManager: UserInfoManager,
 ) : CommandsFlowHandler<SignUpCommand, SignUpEvent> {
 
-
     override fun handle(commands: Flow<SignUpCommand>): Flow<SignUpEvent> {
         return commands.filterIsInstance<SignUp>()
             .transform { command ->

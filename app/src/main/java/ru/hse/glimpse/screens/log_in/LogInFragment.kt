@@ -67,6 +67,8 @@ class LogInFragment : FlowFragment<LogInComponent>(R.layout.fragment_log_in) {
         when (news) {
             is LogInNews.OpenSignUp -> router.replaceScreen(Screens.SignUpScreen())
             is LogInNews.OpenMain -> router.newRootChain(Screens.MainScreen())
+            is LogInNews.OpenProfile -> router.newRootChain(Screens.FillProfileScreen())
+            is LogInNews.OpenPrompts -> router.newRootChain(Screens.PromptsScreen())
             is LogInNews.ShowError -> showAlert(news.message)
         }
     }

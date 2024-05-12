@@ -7,7 +7,10 @@ internal sealed interface EntrypointEvent
 internal sealed interface EntrypointCommandResultEvent : EntrypointEvent {
 
     object AuthenticationPassed : EntrypointCommandResultEvent
-    data class AuthenticationFailed(val message: String?) : EntrypointCommandResultEvent
+    data class AuthenticationFailed(
+        val message: String?,
+        val isProfileNotFound: Boolean?,
+    ) : EntrypointCommandResultEvent
 
     data class GetPromptsSuccess(val prompts: List<Prompt>) : EntrypointCommandResultEvent
     data class GetPromptsError(val message: String?) : EntrypointCommandResultEvent

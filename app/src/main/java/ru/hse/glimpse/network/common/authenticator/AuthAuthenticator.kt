@@ -17,7 +17,7 @@ private const val TOKEN_TYPE = "Bearer"
 class AuthAuthenticator @Inject constructor(
     private val tokenManager: JwtTokenManager,
     private val refreshTokenApi: RefreshTokenApi,
-    // todo: add return to main screen when 403 unauthorized
+    // todo: add return to main screen when 401 unauthorized
 ) : Authenticator {
 
     override fun authenticate(route: Route?, response: Response): Request? {
@@ -26,9 +26,7 @@ class AuthAuthenticator @Inject constructor(
         synchronized(this) {
             val updatedToken = runBlocking { tokenManager.getAccessJwt() }
             val token = if (currentToken != updatedToken) updatedToken else {
-                val newSessionResponse = runBlocking {
-                    refreshTokenApi.refresh(tokenManager.getRefreshJwt() ?: "")
-                }
+                val newSessionResponse = runBlocking { refreshTokenApi.refresh() }
                 if (newSessionResponse.isSuccess) {
                     newSessionResponse.getOrNull().let { body ->
                         runBlocking {

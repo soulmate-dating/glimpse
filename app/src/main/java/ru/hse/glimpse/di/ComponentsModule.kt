@@ -1,8 +1,10 @@
 package ru.hse.glimpse.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.hse.glimpse.network.api.profile.ProfileRepository
 import ru.hse.glimpse.network.api.prompts.PromptsRepository
@@ -64,9 +66,17 @@ internal class ComponentsModule {
         authRepository: AuthRepository,
         jwtTokenManager: JwtTokenManager,
         userInfoManager: UserInfoManager,
+        profileRepository: ProfileRepository,
+        promptsRepository: PromptsRepository,
     ): LogInComponent {
         return object : LogInComponent(),
-            LogInModule by LogInModule(authRepository, jwtTokenManager, userInfoManager) {}
+            LogInModule by LogInModule(
+                authRepository,
+                jwtTokenManager,
+                userInfoManager,
+                profileRepository,
+                promptsRepository,
+            ) {}
     }
 
     @Provides
@@ -92,8 +102,9 @@ internal class ComponentsModule {
     fun providePromptsComponent(
         userInfoManager: UserInfoManager,
         promptsRepository: PromptsRepository,
+        @ApplicationContext context: Context,
     ): PromptsComponent {
         return object : PromptsComponent(),
-            PromptsModule by PromptsModule(userInfoManager, promptsRepository) {}
+            PromptsModule by PromptsModule(userInfoManager, promptsRepository, context) {}
     }
 }
