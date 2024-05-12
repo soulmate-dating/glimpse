@@ -8,6 +8,7 @@ import ru.hse.glimpse.navigation.Screens
 import ru.hse.glimpse.screens.entrypoint.di.EntrypointComponent
 import ru.hse.glimpse.screens.entrypoint.presentation.news.EntrypointNews
 import ru.hse.glimpse.utils.views.FlowFragment
+import ru.hse.glimpse.utils.views.showAlert
 import ru.tinkoff.kotea.android.lifecycle.collectOnCreate
 import ru.tinkoff.kotea.android.storeViaViewModel
 
@@ -27,7 +28,10 @@ class EntrypointFragment : FlowFragment<EntrypointComponent>(R.layout.fragment_e
 
     private fun handleNews(news: EntrypointNews) {
         when (news) {
-            is EntrypointNews.OpenInOrUpScreen -> router.newRootChain(Screens.ChatsScreen())
+            is EntrypointNews.OpenInOrUpScreen -> router.newRootChain(Screens.InOrUpScreen())
+            is EntrypointNews.ShowError -> showAlert(news.message)
+            is EntrypointNews.OpenMainScreen -> router.newRootChain(Screens.MainScreen())
+            is EntrypointNews.OpenPromptsScreen -> router.newRootChain(Screens.PromptsScreen())
         }
     }
 }

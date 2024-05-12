@@ -15,9 +15,17 @@
     <string name="password">Password</string>
     <string name="fill_your_profile">Fill your profile</string>
 
+    <string name="add_your_promts">Your prompts</string>
+    <string name="add_text_prompt">Text</string>
+    <string name="add_image_prompt">Image</string>
+    <string name="empty_prompts_add">It seems that you do not have enough prompts, at least 2 required. Let\'s add them!</string>
+    <string name="prompt">Prompt</string>
+    <string name="question">Question</string>
+    <string name="answer">Answer</string>
+
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
-    <string name="birth_date">Birth date</string>
+    <string name="birth_date">Fill your birth date</string>
     <string name="set">Set</string>
     <string name="sex">Sex</string>
     <string name="preferred_partner">Preference</string>
@@ -29,6 +37,7 @@
     <string name="smokes">Smokes</string>
 
     <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
     <string name="sample_error_message">Something went wrong</string>
 </resources>

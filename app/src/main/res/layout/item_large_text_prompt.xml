@@ -19,7 +19,7 @@
         android:paddingVertical="72dp">
 
         <TextView
-            android:id="@+id/type"
+            android:id="@+id/text_prompt_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/along_sanss2_medium"
@@ -28,7 +28,7 @@
             tools:text="My most irrational fear" />
 
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/text_prompt_answer"
             android:paddingTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

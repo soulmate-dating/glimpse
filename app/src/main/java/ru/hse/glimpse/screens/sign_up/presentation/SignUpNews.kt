@@ -4,5 +4,5 @@ sealed interface SignUpNews {
 
     object OpenLogIn : SignUpNews
     object OpenFormFilling : SignUpNews
-    data class ShowError(val message: String) : SignUpNews
+    data class ShowError(val message: String?) : SignUpNews
 }

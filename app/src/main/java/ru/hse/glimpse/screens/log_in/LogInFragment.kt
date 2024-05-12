@@ -9,9 +9,11 @@ import ru.hse.glimpse.databinding.FragmentLogInBinding
 import ru.hse.glimpse.navigation.Screens
 import ru.hse.glimpse.screens.log_in.di.LogInComponent
 import ru.hse.glimpse.screens.log_in.presentation.LogInEvent
+import ru.hse.glimpse.screens.log_in.presentation.LogInEvent.LoginClicked
 import ru.hse.glimpse.screens.log_in.presentation.LogInNews
 import ru.hse.glimpse.utils.views.FlowFragment
 import ru.hse.glimpse.utils.views.makeTextLink
+import ru.hse.glimpse.utils.views.showAlert
 import ru.tinkoff.kotea.android.lifecycle.collectOnCreate
 import ru.tinkoff.kotea.android.storeViaViewModel
 
@@ -29,16 +31,43 @@ class LogInFragment : FlowFragment<LogInComponent>(R.layout.fragment_log_in) {
             stateCollector = null,
             newsCollector = ::handleNews,
         )
+        initViews()
+    }
+
+    private fun initViews() {
         makeTextLink(
             textView = binding.alreadyHaveAnAccount,
             string = getString(R.string.sign_up),
             action = { store.dispatch(LogInEvent.SignUpClicked) },
         )
+
+        binding.login.setOnClickListener {
+            if (binding.email.editText?.text.isNullOrEmpty()) {
+                binding.email.editText?.error = "Email can't be empty!"
+            }
+            if (binding.password.editText?.text.isNullOrEmpty()) {
+                binding.password.editText?.error = "Password can't be empty!"
+            }
+
+            if (!binding.email.editText?.text.isNullOrEmpty() &&
+                !binding.password.editText?.text.isNullOrEmpty()
+            ) {
+                store.dispatch(
+                    LoginClicked(
+                        email = binding.email.editText?.text?.toString()!!,
+                        password = binding.password.editText?.text?.toString()!!,
+                    )
+                )
+            }
+        }
     }
+
 
     private fun handleNews(news: LogInNews) {
         when (news) {
             is LogInNews.OpenSignUp -> router.replaceScreen(Screens.SignUpScreen())
+            is LogInNews.OpenMain -> router.newRootChain(Screens.MainScreen())
+            is LogInNews.ShowError -> showAlert(news.message)
         }
     }
 }

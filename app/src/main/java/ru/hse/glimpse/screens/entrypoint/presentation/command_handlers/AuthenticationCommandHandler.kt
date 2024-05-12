@@ -1,28 +1,35 @@
 package ru.hse.glimpse.screens.entrypoint.presentation.command_handlers
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.skydoves.sandwich.message
+import com.skydoves.sandwich.suspendOnFailure
+import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
-import kotlinx.coroutines.flow.mapLatest
-import ru.hse.glimpse.utils.coroutines.runCatchingCancellable
+import kotlinx.coroutines.flow.transform
+import ru.hse.glimpse.network.api.profile.ProfileRepository
 import ru.hse.glimpse.screens.entrypoint.presentation.command.EntrypointCommand
-import ru.hse.glimpse.screens.entrypoint.presentation.event.EntrypointCommandResultEvent
+import ru.hse.glimpse.screens.entrypoint.presentation.event.EntrypointCommandResultEvent.AuthenticationFailed
+import ru.hse.glimpse.screens.entrypoint.presentation.event.EntrypointCommandResultEvent.AuthenticationPassed
 import ru.hse.glimpse.screens.entrypoint.presentation.event.EntrypointEvent
+import ru.hse.glimpse.utils.user_info.UserInfoManager
 
-// todo: add repository to fetch auth data
-internal class AuthenticationCommandHandler : EntrypointCommandsFlowHandler {
+internal class AuthenticationCommandHandler(
+    private val userInfoManager: UserInfoManager,
+    private val profileRepository: ProfileRepository,
+) : EntrypointCommandsFlowHandler {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun handle(commands: Flow<EntrypointCommand>): Flow<EntrypointEvent> {
         return commands.filterIsInstance<EntrypointCommand.Authenticate>()
-            .mapLatest {
-                runCatchingCancellable {
-                    delay(2000)
-                    error("some error")
-                }
-                    .map { EntrypointCommandResultEvent.AuthenticationPassed }
-                    .getOrElse { EntrypointCommandResultEvent.AuthenticationFailed(it) }
+            .transform {
+                delay(2000)
+
+                profileRepository.getProfile(userInfoManager.getUserId() ?: "")
+                    .suspendOnSuccess {
+                        emit(AuthenticationPassed)
+                    }.suspendOnFailure {
+                        emit(AuthenticationFailed(this.message()))
+                    }
             }
     }
 }

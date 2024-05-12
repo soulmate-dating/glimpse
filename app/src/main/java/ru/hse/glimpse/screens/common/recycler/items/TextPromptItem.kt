@@ -1,4 +1,4 @@
-package ru.hse.glimpse.screens.main.ui.data
+package ru.hse.glimpse.screens.common.recycler.items
 
 import android.view.View
 import androidx.core.view.isVisible
@@ -9,12 +9,13 @@ import ru.tinkoff.mobile.tech.ti_recycler.base.ViewTyped
 import ru.tinkoff.mobile.tech.ti_recycler.clicks.TiRecyclerClickListener
 
 data class TextPromptItem(
-    val type: String?,
-    val content: String,
+    val question: String?,
+    val answer: String,
+    val isLikeButtonVisible: Boolean = true,
 ) : ViewTyped {
 
     override val uid: String
-        get() = type + content
+        get() = question + answer
     override val viewType: Int
         get() = R.layout.item_large_text_prompt
 }
@@ -27,11 +28,13 @@ class TextPromptViewHolder(
     private val binding = ItemLargeTextPromptBinding.bind(view)
 
     override fun bind(item: TextPromptItem) {
-        binding.type.isVisible = item.type != null
-        item.type.let {
-            binding.type.text = item.type
+        binding.textPromptQuestion.isVisible = item.question != null
+        item.question.let {
+            binding.textPromptQuestion.text = item.question
         }
-        binding.content.text = item.content
+        binding.textPromptAnswer.text = item.answer
+
+        binding.floatingActionButton.isVisible = item.isLikeButtonVisible
 
         with(binding.card) {
             isClickable = false

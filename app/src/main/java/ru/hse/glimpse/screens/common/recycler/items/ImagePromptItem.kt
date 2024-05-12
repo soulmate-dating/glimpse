@@ -1,4 +1,4 @@
-package ru.hse.glimpse.screens.main.ui.data
+package ru.hse.glimpse.screens.common.recycler.items
 
 import android.view.View
 import coil.load

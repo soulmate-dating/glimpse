@@ -6,7 +6,18 @@ class FillProfileUpdate : DslUpdate<FillProfileState, FillProfileEvent, FillProf
 
     override fun NextBuilder.update(event: FillProfileEvent) {
         when (event) {
-            is FillProfileUiEvent.SaveClicked -> news(FillProfileNews.OpenChatsScreen)
+            is FillProfileUiEvent.SaveClicked -> {
+                state { copy(isLoading = true) }
+                commands(FillProfileCommand.SendProfile(event.profile))
+            }
+            is FillProfileEvent.FillProfileSuccess -> {
+                state { copy(isLoading = false) }
+                news(FillProfileNews.OpenMainScreen)
+            }
+            is FillProfileEvent.FillProfileError -> {
+                state { copy(isLoading = false) }
+                news(FillProfileNews.ShowError(event.message))
+            }
         }
     }
 }

@@ -7,5 +7,5 @@ sealed interface SignUpEvent {
 
 sealed interface SignUpCommandResultEvent : SignUpEvent {
     object CreateAccountSuccess : SignUpCommandResultEvent
-    data class CreateAccountFailure(val message: String) : SignUpCommandResultEvent
+    data class CreateAccountFailure(val message: String?) : SignUpCommandResultEvent
 }
