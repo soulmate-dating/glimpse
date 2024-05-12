@@ -11,7 +11,6 @@ class SignUpUpdate : DslUpdate<SignUpState, SignUpEvent, SignUpCommand, SignUpNe
                 state { copy(isLoading = true) }
                 commands(SignUpCommand.SignUp(event.email, event.password))
             }
-
             is SignUpCommandResultEvent.CreateAccountSuccess -> {
                 state { copy(isLoading = false) }
                 news(SignUpNews.OpenFormFilling)

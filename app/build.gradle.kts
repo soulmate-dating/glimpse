@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 @Suppress("UnstableApiUsage")
@@ -96,7 +97,17 @@ dependencies {
 
     // di
     implementation("com.google.dagger:hilt-android:2.47")
+    implementation("androidx.activity:activity:1.8.0")
     kapt("com.google.dagger:hilt-android-compiler:2.47")
+
+    // network
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.github.skydoves:sandwich-retrofit:2.0.7") // ApiResponse
+
+    // data store (shared preferences)
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // android
     implementation("androidx.core:core-ktx:1.12.0")

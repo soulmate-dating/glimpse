@@ -3,8 +3,8 @@ package ru.hse.glimpse.screens.main.ui.mapper
 import ru.hse.glimpse.screens.main.model.Prompt
 import ru.hse.glimpse.screens.main.model.Prompt.Type
 import ru.hse.glimpse.screens.main.presentation.MainState
-import ru.hse.glimpse.screens.main.ui.data.ImagePromptItem
-import ru.hse.glimpse.screens.main.ui.data.TextPromptItem
+import ru.hse.glimpse.screens.common.recycler.items.ImagePromptItem
+import ru.hse.glimpse.screens.common.recycler.items.TextPromptItem
 import ru.tinkoff.kotea.android.ui.ResourcesProvider
 import ru.tinkoff.kotea.android.ui.UiStateMapper
 import ru.tinkoff.mobile.tech.ti_recycler.base.ViewTyped
@@ -35,8 +35,8 @@ class MainUiStateMapper : UiStateMapper<MainState, MainUiState> {
 
     private fun getTextPromptItem(prompt: Prompt): TextPromptItem {
         return TextPromptItem(
-            type = prompt.question,
-            content = prompt.content,
+            question = prompt.question,
+            answer = prompt.content,
         )
     }
 }

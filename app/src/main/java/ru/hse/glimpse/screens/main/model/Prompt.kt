@@ -2,6 +2,7 @@ package ru.hse.glimpse.screens.main.model
 
 import androidx.annotation.Keep
 
+// todo: delete and use basic prompt from network module
 @Keep
 data class Prompt(
     val type: Type,

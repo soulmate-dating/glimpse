@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="sex">
-        <item>Male</item>
+        <item>Man</item>
         <item>Woman</item>
     </array>
     <array name="preferred_type">
-        <item>Male</item>
+        <item>Man</item>
         <item>Woman</item>
-        <item>Everyone</item>
+        <item>Anyone</item>
     </array>
     <array name="intention">
         <item>Life partner</item>
-        <item>Long-term relationships</item>
-        <item>Short-term relationships</item>
+        <item>Long-term relationship</item>
+        <item>Short-term relationship</item>
+        <item>Friendship</item>
+        <item>Figuring it out</item>
         <item>Prefer not to say</item>
     </array>
     <array name="no_yes">

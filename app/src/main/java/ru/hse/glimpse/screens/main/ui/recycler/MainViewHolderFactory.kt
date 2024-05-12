@@ -2,8 +2,8 @@ package ru.hse.glimpse.screens.main.ui.recycler
 
 import android.view.View
 import ru.hse.glimpse.R
-import ru.hse.glimpse.screens.main.ui.data.ImagePromptViewHolder
-import ru.hse.glimpse.screens.main.ui.data.TextPromptViewHolder
+import ru.hse.glimpse.screens.common.recycler.items.ImagePromptViewHolder
+import ru.hse.glimpse.screens.common.recycler.items.TextPromptViewHolder
 import ru.tinkoff.mobile.tech.ti_recycler.base.BaseViewHolder
 import ru.tinkoff.mobile.tech.ti_recycler_coroutines.base.CoroutinesHolderFactory
 
