@@ -21,7 +21,7 @@ internal class GetPromptsCommandHandler(
 
 
     override fun handle(commands: Flow<EntrypointCommand>): Flow<EntrypointEvent> {
-        return commands.filterIsInstance<EntrypointCommand.GetProfiles>()
+        return commands.filterIsInstance<EntrypointCommand.GetPrompts>()
             .transform {
                 promptsRepository.getPrompts(userInfoManager.getUserId() ?: "")
                     .suspendOnSuccess {

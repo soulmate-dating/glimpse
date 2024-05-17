@@ -32,6 +32,7 @@ class EntrypointFragment : FlowFragment<EntrypointComponent>(R.layout.fragment_e
             is EntrypointNews.ShowError -> showAlert(news.message)
             is EntrypointNews.OpenMainScreen -> router.newRootChain(Screens.MainScreen())
             is EntrypointNews.OpenPromptsScreen -> router.newRootChain(Screens.PromptsScreen())
+            is EntrypointNews.OpenFillProfileScreen -> router.newRootChain(Screens.FillProfileScreen())
         }
     }
 }

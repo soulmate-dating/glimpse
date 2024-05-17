@@ -27,5 +27,15 @@ class EmptyPromptsTextViewHolder(
             string = "2 required",
             color = Color.RED,
         )
+        makeTextLink(
+            textView = binding.title,
+            string = "image",
+            color = Color.BLUE,
+        )
+        makeTextLink(
+            textView = binding.title,
+            string = "text",
+            color = Color.BLUE,
+        )
     }
 }

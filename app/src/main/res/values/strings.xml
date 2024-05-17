@@ -18,10 +18,15 @@
     <string name="add_your_promts">Your prompts</string>
     <string name="add_text_prompt">Text</string>
     <string name="add_image_prompt">Image</string>
-    <string name="empty_prompts_add">It seems that you do not have enough prompts, at least 2 required. Let\'s add them!</string>
+    <string name="empty_prompts_add">It seems that you do not have enough prompts, at least 2 required: 1 image and 1 text.\nLet\'s add them!</string>
     <string name="prompt">Prompt</string>
     <string name="question">Question</string>
     <string name="answer">Answer</string>
+    <string name="load_image">Load image</string>
+    <string name="image_is_loaded">Image is loaded</string>
+    <string name="image_is_not_loaded">Image is not loaded</string>
+    <string name="you_should_load_image">You should load image!</string>
+    <string name="error">Error</string>
 
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>

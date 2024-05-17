@@ -3,5 +3,5 @@ package ru.hse.glimpse.screens.entrypoint.presentation.command
 internal sealed interface EntrypointCommand {
 
     object Authenticate : EntrypointCommand
-    object GetProfiles : EntrypointCommand
+    object GetPrompts : EntrypointCommand
 }

@@ -22,14 +22,21 @@ internal class AuthenticationCommandHandler(
     override fun handle(commands: Flow<EntrypointCommand>): Flow<EntrypointEvent> {
         return commands.filterIsInstance<EntrypointCommand.Authenticate>()
             .transform {
-                delay(2000)
+                delay(1000)
 
-                profileRepository.getProfile(userInfoManager.getUserId() ?: "")
+                val userId = userInfoManager.getUserId()
+                if (userId == null) {
+                    emit(AuthenticationFailed(null, false))
+                    return@transform
+                }
+
+                profileRepository.getProfile(userId)
                     .suspendOnSuccess {
                         emit(AuthenticationPassed)
                     }.suspendOnFailure {
-                        emit(AuthenticationFailed(this.message()))
+                        val message = this.message()
+                        emit(AuthenticationFailed(message, message.contains("Not Found")))
                     }
-            }
-    }
+                }
+        }
 }
