@@ -14,14 +14,13 @@ import ru.hse.glimpse.screens.fill_profile.presentation.FillProfileEvent.FillPro
 import ru.hse.glimpse.utils.user_info.UserInfoManager
 import ru.tinkoff.kotea.core.CommandsFlowHandler
 
-class SendProfileCommandHandler(
+class SendNewProfileCommandHandler(
     private val profileRepository: ProfileRepository,
     private val userInfoManager: UserInfoManager,
 ) : CommandsFlowHandler<FillProfileCommand, FillProfileEvent> {
 
-
     override fun handle(commands: Flow<FillProfileCommand>): Flow<FillProfileEvent> {
-        return commands.filterIsInstance<FillProfileCommand.SendProfile>()
+        return commands.filterIsInstance<FillProfileCommand.SendNewProfile>()
             .transform { command ->
                 profileRepository.sendProfile(
                     userId = userInfoManager.getUserId() ?: "",

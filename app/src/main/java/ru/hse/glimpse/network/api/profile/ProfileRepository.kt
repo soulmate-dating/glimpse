@@ -20,4 +20,11 @@ class ProfileRepository (
     ): ApiResponse<Unit> {
         return profileApi.sendProfile(userId, profile)
     }
+
+    suspend fun updateProfile(
+        userId: String,
+        profile: Profile,
+    ): ApiResponse<Unit> {
+        return profileApi.updateProfile(userId, profile)
+    }
 }

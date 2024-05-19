@@ -15,6 +15,7 @@ import ru.hse.glimpse.network.api.profile.model.Profile
 import ru.hse.glimpse.screens.fill_profile.presentation.FillProfileNews
 import ru.hse.glimpse.screens.fill_profile.presentation.FillProfileState
 import ru.hse.glimpse.screens.fill_profile.presentation.FillProfileUiEvent
+import ru.hse.glimpse.utils.kotlin.capitalized
 import ru.hse.glimpse.utils.views.FlowFragment
 import ru.hse.glimpse.utils.views.setShowProgress
 import ru.hse.glimpse.utils.views.showAlert
@@ -83,6 +84,21 @@ class FillProfileFragment : FlowFragment<FillProfileComponent>(R.layout.fragment
     }
 
     private fun render(state: FillProfileState) {
+        if (state.profile != null) {
+            with(state.profile) {
+                binding.name.editText?.setText(firstName)
+                binding.surname.editText?.setText(lastName)
+                binding.date.editText?.setText(birthDate)
+                binding.sex.editText?.setText(sex.capitalized())
+                binding.preferredPartner.editText?.setText(preference.capitalized())
+                binding.intention.editText?.setText(intention.capitalized())
+                binding.height.editText?.setText(height.toString())
+                binding.hasChildren.editText?.setText(if (hasChildren) "Yes" else "No")
+                binding.familyPlans.editText?.setText(familyPlans.capitalized())
+                binding.drinksAlcohol.editText?.setText(drinksAlcohol.capitalized())
+                binding.smokes.editText?.setText(smokes.capitalized())
+            }
+        }
         binding.saveButton.setShowProgress(showProgress = state.isLoading)
     }
 
@@ -90,6 +106,7 @@ class FillProfileFragment : FlowFragment<FillProfileComponent>(R.layout.fragment
         when (news) {
             is FillProfileNews.OpenMainScreen -> router.newRootChain(Screens.PromptsScreen())
             is FillProfileNews.ShowError -> showAlert(news.message)
+            is FillProfileNews.OpenAccountScreen -> router.replaceScreen(Screens.AccountScreen())
         }
     }
 
