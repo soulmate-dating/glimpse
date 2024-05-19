@@ -4,6 +4,7 @@ import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import ru.hse.glimpse.network.api.profile.model.Profile
 import ru.hse.glimpse.network.api.profile.model.ProfileResponse
@@ -17,6 +18,12 @@ interface ProfileApi {
 
     @POST("users/{user_id}/profile")
     suspend fun sendProfile(
+        @Path("user_id") userId: String,
+        @Body profile: Profile,
+    ): ApiResponse<Unit>
+
+    @PUT("users/{user_id}/profile")
+    suspend fun updateProfile(
         @Path("user_id") userId: String,
         @Body profile: Profile,
     ): ApiResponse<Unit>
