@@ -11,6 +11,7 @@ import javax.inject.Inject
 interface UserInfoManager {
     suspend fun saveUserId(id: String)
     suspend fun getUserId(): String?
+    suspend fun clearUserId()
 }
 
 class UserInfoDataStore @Inject constructor(
@@ -32,5 +33,9 @@ class UserInfoDataStore @Inject constructor(
         return dataStore.data.map { preferences ->
             preferences[ID_KEY]
         }.first()
+    }
+
+    override suspend fun clearUserId() {
+        dataStore.edit { it.remove(ID_KEY) }
     }
 }

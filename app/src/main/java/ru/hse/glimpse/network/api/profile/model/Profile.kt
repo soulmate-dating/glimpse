@@ -41,4 +41,7 @@ data class Profile(
 
     @SerializedName("location")
     val location: String = "location",
+
+    @SerializedName("profile_pic")
+    val profilePictureUrl: String? = null
 )

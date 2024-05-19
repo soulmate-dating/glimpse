@@ -23,6 +23,7 @@ class MainUpdate : DslUpdate<MainState, MainEvent, MainCommand, MainNews>() {
     private fun NextBuilder.handleUiEvent(event: MainUiEvent) {
         when (event) {
             is MainUiEvent.ChatsScreenClicked -> news(MainNews.OpenChats)
+            is MainUiEvent.AccountScreenClicked -> news(MainNews.OpenAccount)
         }
     }
 }

@@ -12,7 +12,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="Leo" />
+        app:title="Leo"
+        app:titleTextAppearance="@style/text_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

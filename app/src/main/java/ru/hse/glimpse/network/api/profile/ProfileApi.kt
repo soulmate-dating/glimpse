@@ -6,13 +6,14 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import ru.hse.glimpse.network.api.profile.model.Profile
+import ru.hse.glimpse.network.api.profile.model.ProfileResponse
 
 interface ProfileApi {
 
     @GET("users/{user_id}/profile")
     suspend fun getProfile(
         @Path("user_id") userId: String,
-    ): ApiResponse<Unit>
+    ): ApiResponse<ProfileResponse>
 
     @POST("users/{user_id}/profile")
     suspend fun sendProfile(
