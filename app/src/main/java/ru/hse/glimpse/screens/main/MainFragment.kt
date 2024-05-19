@@ -67,6 +67,10 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main) {
                     store.dispatch(MainUiEvent.ChatsScreenClicked)
                     true
                 }
+                R.id.account -> {
+                    store.dispatch(MainUiEvent.AccountScreenClicked)
+                    true
+                }
                 else -> false
             }
         }
@@ -98,7 +102,8 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main) {
 
     private fun handleNews(news: MainNews) {
         when (news) {
-            is MainNews.OpenChats -> router.newRootScreen(Screens.ChatsScreen())
+            is MainNews.OpenChats -> router.navigateTo(Screens.ChatsScreen())
+            is MainNews.OpenAccount -> router.navigateTo(Screens.AccountScreen())
         }
     }
 }

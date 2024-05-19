@@ -41,6 +41,11 @@
     <string name="drinks_alcohol">Drinks alcohol</string>
     <string name="smokes">Smokes</string>
 
+    <string name="profile">Profile</string>
+    <string name="edit_your_profile">Edit your profile</string>
+    <string name="prompts">Prompts</string>
+    <string name="edit_your_prompts">Edit your prompts</string>
+
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 

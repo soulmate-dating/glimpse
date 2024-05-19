@@ -1,6 +1,7 @@
 package ru.hse.glimpse.navigation
 
 import com.github.terrakok.cicerone.androidx.FragmentScreen
+import ru.hse.glimpse.screens.account.AccountFragment
 import ru.hse.glimpse.screens.chats.ChatsFragment
 import ru.hse.glimpse.screens.fill_profile.FillProfileFragment
 import ru.hse.glimpse.screens.in_or_up.InOrUpFragment
@@ -25,4 +26,6 @@ object Screens {
     fun MainScreen() = FragmentScreen { MainFragment() }
 
     fun PromptsScreen() = FragmentScreen { PromptsFragment() }
+
+    fun AccountScreen() = FragmentScreen { AccountFragment() }
 }

@@ -11,4 +11,5 @@ sealed interface MainCommandResultEvent : MainEvent {
 
 sealed interface MainUiEvent : MainEvent {
     object ChatsScreenClicked : MainUiEvent
+    object AccountScreenClicked : MainUiEvent
 }
