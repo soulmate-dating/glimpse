@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    style="?attr/materialCardViewElevatedStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="false"
+    android:elevation="32dp"
+    android:focusable="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/age"
+            style="@style/text_body_s"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableStartCompat="@drawable/cake_outline"
+            tools:text="25" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="8dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/height"
+            style="@style/text_body_s"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableStartCompat="@drawable/height"
+            tools:text="164 cm" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="8dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/relationship"
+            style="@style/text_body_s"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableStartCompat="@drawable/search"
+            tools:text="Short-term relationship" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="8dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/drink"
+            style="@style/text_body_s"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableStartCompat="@drawable/glass_wine"
+            tools:text="Yes" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="8dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/smoke"
+            style="@style/text_body_s"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableStartCompat="@drawable/smoking"
+            tools:text="Sometimes" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="8dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/family"
+            style="@style/text_body_s"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableStartCompat="@drawable/human_male_female_child"
+            tools:text="Not sure yet" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="8dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/looking_for"
+            style="@style/text_body_s"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableStartCompat="@drawable/heart_search"
+            tools:text="Man" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
