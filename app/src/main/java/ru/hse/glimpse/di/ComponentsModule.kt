@@ -113,10 +113,15 @@ internal class ComponentsModule {
     fun providePromptsComponent(
         userInfoManager: UserInfoManager,
         promptsRepository: PromptsRepository,
+        profileRepository: ProfileRepository,
         @ApplicationContext context: Context,
     ): PromptsComponent {
         return object : PromptsComponent(),
-            PromptsModule by PromptsModule(userInfoManager, promptsRepository, context) {}
+            PromptsModule by PromptsModule(
+                userInfoManager, promptsRepository,
+                profileRepository,
+                context
+            ) {}
     }
 
     @Provides
