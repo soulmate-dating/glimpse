@@ -8,6 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.hse.glimpse.network.api.profile.ProfileRepository
 import ru.hse.glimpse.network.api.prompts.PromptsRepository
+import ru.hse.glimpse.network.api.reactions.ReactionsRepository
 import ru.hse.glimpse.network.api.unauthorized.AuthRepository
 import ru.hse.glimpse.network.common.token.JwtTokenManager
 import ru.hse.glimpse.screens.account.di.AccountComponent
@@ -26,6 +27,8 @@ import ru.hse.glimpse.screens.main.di.MainComponent
 import ru.hse.glimpse.screens.main.di.MainModule
 import ru.hse.glimpse.screens.prompts.di.PromptsComponent
 import ru.hse.glimpse.screens.prompts.di.PromptsModule
+import ru.hse.glimpse.screens.reactions.di.ReactionsComponent
+import ru.hse.glimpse.screens.reactions.di.ReactionsModule
 import ru.hse.glimpse.screens.sign_up.di.SignUpComponent
 import ru.hse.glimpse.screens.sign_up.di.SignUpModule
 import ru.hse.glimpse.utils.user_info.UserInfoManager
@@ -104,8 +107,13 @@ internal class ComponentsModule {
 
     @Provides
     @Singleton
-    fun provideMainComponent(): MainComponent {
-        return object : MainComponent(), MainModule by MainModule() {}
+    fun provideMainComponent(
+        userInfoManager: UserInfoManager,
+        profileRepository: ProfileRepository,
+        reactionsRepository: ReactionsRepository,
+    ): MainComponent {
+        return object : MainComponent(),
+            MainModule by MainModule(userInfoManager, profileRepository, reactionsRepository) {}
     }
 
     @Provides
@@ -133,5 +141,15 @@ internal class ComponentsModule {
     ): AccountComponent {
         return object : AccountComponent(),
             AccountModule by AccountModule(userInfoManager, profileRepository, jwtTokenManager) {}
+    }
+
+    @Provides
+    @Singleton
+    fun provideReactionsComponent(
+        userInfoManager: UserInfoManager,
+        reactionsRepository: ReactionsRepository,
+    ): ReactionsComponent {
+        return object : ReactionsComponent(),
+            ReactionsModule by ReactionsModule(userInfoManager, reactionsRepository) {}
     }
 }

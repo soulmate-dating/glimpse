@@ -50,4 +50,12 @@
     <string name="cancel">Cancel</string>
 
     <string name="sample_error_message">Something went wrong</string>
+
+    <string name="your_turn">Your turn (%1$s)</string>
+    <string name="their_turn">Their turn (%1$s)</string>
+
+    <string name="send_reaction">Send reaction</string>
+    <string name="your_comment">Your comment</string>
+    <string name="send">Send</string>
+    <string name="reply">Reply</string>
 </resources>

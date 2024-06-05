@@ -17,9 +17,4 @@ open class FlowFragment<Component: BaseComponent>(
 
     @Inject
     lateinit var component: Component
-
-    protected fun showAlertAndQuit(message: String? = "Some alert") {
-        showAlert(message = message ?: getString(R.string.sample_error_message))
-        router.newRootChain(Screens.InOrUpScreen())
-    }
 }

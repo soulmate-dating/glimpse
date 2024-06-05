@@ -73,6 +73,12 @@
         <item name="android:fontFamily">@font/along_sanss2_medium</item>
     </style>
 
+    <style name="text_body_m_regular" parent="text">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#393939</item>
+        <item name="android:fontFamily">@font/along_sanss2_regular</item>
+    </style>
+
     <style name="text_caption" parent="text">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#393939</item>

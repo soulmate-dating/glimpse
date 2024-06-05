@@ -5,7 +5,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.mapLatest
-import ru.hse.glimpse.screens.chats.model.Chat
+import ru.hse.glimpse.network.api.chats.model.ChatSummary
+import ru.hse.glimpse.network.api.chats.model.CompanionResponse
 import ru.hse.glimpse.screens.chats.presentation.ChatsCommand
 import ru.hse.glimpse.screens.chats.presentation.ChatsCommandResultEvent.ChatsError
 import ru.hse.glimpse.screens.chats.presentation.ChatsEvent
@@ -22,60 +23,87 @@ class LoadChatsCommandHandler : CommandsFlowHandler<ChatsCommand, ChatsEvent> {
                 runCatchingCancellable {
                     getChats()
                 }
-                    .map(::ChatsLoaded)
+                    .map { ChatsLoaded(it.companions) }
                     .getOrElse(::ChatsError)
             }
     }
 
-    private suspend fun getChats(): List<Chat> {
-        delay(3000)
+    private suspend fun getChats(): CompanionResponse {
+        delay(1000)
 
-        return listOf(
-            Chat(
-                imageLink = "https://vegnews.com/media/W1siZiIsIjM5NjIzL1ZlZ05ld3MuTGVvbmFyZG9EaUNhcHJpbzMuU2h1dHRlcnN0b2NrLmdpZiJdLFsicCIsImNyb3BfcmVzaXplZCIsIjE0OTV4ODg0KzArMCIsIjE2MDB4OTQ2XiIseyJmb3JtYXQiOiJqcGcifV0sWyJwIiwib3B0aW1pemUiXV0/VegNews.LeonardoDiCaprio3.Shutterstock.gif?sha=4b96fe3240cb8eb3",
-                name = "Leo",
-                lastMessage = "wanna see my Oscar?",
-            ),
-            Chat(
-                imageLink = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/535891_v9_bc.jpg",
-                name = "Timothee",
-                lastMessage = "have you ever been to desert?",
-            ),
-            Chat(
-                imageLink = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bill_Clinton.jpg/1200px-Bill_Clinton.jpg",
-                name = "Bill",
-                lastMessage = "you sound scary",
-            ),
-            Chat(
-                imageLink = "https://vegnews.com/media/W1siZiIsIjM5NjIzL1ZlZ05ld3MuTGVvbmFyZG9EaUNhcHJpbzMuU2h1dHRlcnN0b2NrLmdpZiJdLFsicCIsImNyb3BfcmVzaXplZCIsIjE0OTV4ODg0KzArMCIsIjE2MDB4OTQ2XiIseyJmb3JtYXQiOiJqcGcifV0sWyJwIiwib3B0aW1pemUiXV0/VegNews.LeonardoDiCaprio3.Shutterstock.gif?sha=4b96fe3240cb8eb3",
-                name = "Leo",
-                lastMessage = "wanna see my Oscar?",
-            ),
-            Chat(
-                imageLink = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/535891_v9_bc.jpg",
-                name = "Timothee",
-                lastMessage = "have you ever been to desert?",
-            ),
-            Chat(
-                imageLink = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bill_Clinton.jpg/1200px-Bill_Clinton.jpg",
-                name = "Bill",
-                lastMessage = "you sound scary",
-            ),
-            Chat(
-                imageLink = "https://vegnews.com/media/W1siZiIsIjM5NjIzL1ZlZ05ld3MuTGVvbmFyZG9EaUNhcHJpbzMuU2h1dHRlcnN0b2NrLmdpZiJdLFsicCIsImNyb3BfcmVzaXplZCIsIjE0OTV4ODg0KzArMCIsIjE2MDB4OTQ2XiIseyJmb3JtYXQiOiJqcGcifV0sWyJwIiwib3B0aW1pemUiXV0/VegNews.LeonardoDiCaprio3.Shutterstock.gif?sha=4b96fe3240cb8eb3",
-                name = "Leo",
-                lastMessage = "wanna see my Oscar?",
-            ),
-            Chat(
-                imageLink = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/535891_v9_bc.jpg",
-                name = "Timothee",
-                lastMessage = "have you ever been to desert?",
-            ),
-            Chat(
-                imageLink = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bill_Clinton.jpg/1200px-Bill_Clinton.jpg",
-                name = "Bill",
-                lastMessage = "you sound scary",
-            ),
+        return CompanionResponse(
+            listOf(
+                ChatSummary(
+                    ChatSummary.Companion(
+                        id = "id",
+                        firstName = "Dima",
+                        lastName = "Kutuzov",
+                        picLink = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/535891_v9_bc.jpg",
+                    ),
+                    lastMessage = "Kutuzov",
+                    isYourTurn = true,
+                ),
+                ChatSummary(
+                    ChatSummary.Companion(
+                        id = "id",
+                        firstName = "Dima",
+                        lastName = "Kutuzov",
+                        picLink = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9RtMbdLcmmDJzVk4ficc8hv726M4XDBfu_0Ouk4g63A&s",
+                    ),
+                    lastMessage = "Kutuzov",
+                    isYourTurn = true,
+                ),
+                ChatSummary(
+                    ChatSummary.Companion(
+                        id = "id",
+                        firstName = "Dima",
+                        lastName = "Kutuzov",
+                        picLink = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/535891_v9_bc.jpg",
+                    ),
+                    lastMessage = "Kutuzov",
+                    isYourTurn = true,
+                ),
+                ChatSummary(
+                    ChatSummary.Companion(
+                        id = "id",
+                        firstName = "Dima",
+                        lastName = "Kutuzov",
+                        picLink = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9RtMbdLcmmDJzVk4ficc8hv726M4XDBfu_0Ouk4g63A&s",
+                    ),
+                    lastMessage = "Kutuzov",
+                    isYourTurn = true,
+                ),
+                ChatSummary(
+                    ChatSummary.Companion(
+                        id = "id",
+                        firstName = "Dima",
+                        lastName = "Kutuzov",
+                        picLink = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/535891_v9_bc.jpg",
+                    ),
+                    lastMessage = "Kutuzov",
+                    isYourTurn = false,
+                ),
+                ChatSummary(
+                    ChatSummary.Companion(
+                        id = "id",
+                        firstName = "Dima",
+                        lastName = "Kutuzov",
+                        picLink = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9RtMbdLcmmDJzVk4ficc8hv726M4XDBfu_0Ouk4g63A&s",
+                    ),
+                    lastMessage = "Kutuzov",
+                    isYourTurn = false,
+                ),
+                ChatSummary(
+                    ChatSummary.Companion(
+                        id = "id",
+                        firstName = "Dima",
+                        lastName = "Kutuzov",
+                        picLink = "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/535891_v9_bc.jpg",
+                    ),
+                    lastMessage = "Kutuzov",
+                    isYourTurn = false,
+                ),
+            )
         )
     }
 }

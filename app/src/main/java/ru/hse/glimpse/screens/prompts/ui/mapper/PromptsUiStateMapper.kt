@@ -8,12 +8,10 @@ import ru.hse.glimpse.screens.common.recycler.items.TextPromptItem
 import ru.hse.glimpse.screens.prompts.presentation.PromptsState
 import ru.hse.glimpse.screens.prompts.ui.recycler.data.EmptyPromptsTextItem
 import ru.hse.glimpse.utils.kotlin.capitalized
+import ru.hse.glimpse.utils.kotlin.toYears
 import ru.tinkoff.kotea.android.ui.ResourcesProvider
 import ru.tinkoff.kotea.android.ui.UiStateMapper
 import ru.tinkoff.mobile.tech.ti_recycler.base.ViewTyped
-import java.time.LocalDate
-import java.time.Period
-import java.time.format.DateTimeFormatter
 
 class PromptsUiStateMapper : UiStateMapper<PromptsState, PromptsUiState> {
     override fun ResourcesProvider.map(state: PromptsState): PromptsUiState {
@@ -38,14 +36,16 @@ class PromptsUiStateMapper : UiStateMapper<PromptsState, PromptsUiState> {
                             question = prompt.question,
                             answer = prompt.content,
                             isLikeButtonVisible = false,
+                            prompt = prompt,
                         )
                     )
 
                     IMAGE -> add(
                         ImagePromptItem(
                             question = prompt.question,
-                            imageLink = prompt.content.replace("localhost", "10.0.2.2"),
+                            imageLink = prompt.content,
                             isLikeButtonVisible = false,
+                            prompt = prompt,
                         )
                     )
                 }
@@ -68,13 +68,5 @@ class PromptsUiStateMapper : UiStateMapper<PromptsState, PromptsUiState> {
                 lookingFor = profile.preference.capitalized(),
             )
         }
-    }
-
-    private val String.toYears get() = run {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val birthDate = LocalDate.parse(this, formatter)
-        val now = LocalDate.now()
-
-        Period.between(birthDate, now).years.toString()
     }
 }
