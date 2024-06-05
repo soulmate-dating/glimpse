@@ -1,8 +1,8 @@
 package ru.hse.glimpse.screens.chats.presentation
 
-import ru.hse.glimpse.screens.chats.model.Chat
+import ru.hse.glimpse.network.api.chats.model.ChatSummary
 
 data class ChatsState(
-    val items: List<Chat> = emptyList(),
+    val items: List<ChatSummary> = emptyList(),
     val isLoading: Boolean = false,
 )

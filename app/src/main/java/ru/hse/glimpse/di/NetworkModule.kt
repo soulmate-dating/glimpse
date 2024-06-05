@@ -25,6 +25,8 @@ import ru.hse.glimpse.network.api.profile.ProfileApi
 import ru.hse.glimpse.network.api.profile.ProfileRepository
 import ru.hse.glimpse.network.api.prompts.PromptsApi
 import ru.hse.glimpse.network.api.prompts.PromptsRepository
+import ru.hse.glimpse.network.api.reactions.ReactionsApi
+import ru.hse.glimpse.network.api.reactions.ReactionsRepository
 import ru.hse.glimpse.network.api.refresh.RefreshTokenApi
 import ru.hse.glimpse.network.api.unauthorized.AuthApi
 import ru.hse.glimpse.network.api.unauthorized.AuthRepository
@@ -40,7 +42,8 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 private const val USER_PREFERENCES = "user_preferences"
-private const val BASE_URL = "http://10.0.2.2/api/v0/"
+private const val BASE_URL = "http://95.174.89.70/api/v0/"
+private const val BASE_URL_GOVNO = "http://95.174.89.70/"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -199,5 +202,27 @@ object NetworkModule {
         promptsApi: PromptsApi,
     ): PromptsRepository {
         return PromptsRepository(promptsApi)
+    }
+
+    @Provides
+    @Singleton
+    fun provideReactionsApi(
+        @AuthenticatedClient okHttpClient: OkHttpClient,
+    ): ReactionsApi {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL_GOVNO)
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+            .create(ReactionsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideReactionsRepository(
+        reactionsApi: ReactionsApi,
+    ): ReactionsRepository {
+        return ReactionsRepository(reactionsApi)
     }
 }

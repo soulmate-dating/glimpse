@@ -55,7 +55,7 @@ class AccountFragment : FlowFragment<AccountComponent>(R.layout.fragment_account
 
     private fun render(state: AccountState) {
         binding.name.text = state.firstName ?: ""
-        binding.image.load(state.imageUrl?.replace("localhost", "10.0.2.2")) {
+        binding.image.load(state.imageUrl) {
             crossfade(true)
             placeholder(R.drawable.icon_account_circle)
             transformations(CircleCropTransformation())

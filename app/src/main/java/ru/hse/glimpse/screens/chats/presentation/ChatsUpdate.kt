@@ -15,7 +15,7 @@ class ChatsUpdate : DslUpdate<ChatsState, ChatsEvent, ChatsCommand, ChatsNews>()
         when (event) {
             is ChatsCommandResultEvent.ChatsLoaded -> state {
                 copy(
-                    items = event.chats,
+                    items = event.companions,
                     isLoading = false,
                 )
             }
@@ -26,6 +26,8 @@ class ChatsUpdate : DslUpdate<ChatsState, ChatsEvent, ChatsCommand, ChatsNews>()
     private fun NextBuilder.handleUiEvent(event: ChatsUiEvent) {
         when (event) {
             is ChatsUiEvent.MainScreenClicked -> news(ChatsNews.OpenMainScreen)
+            is ChatsUiEvent.AccountClicked -> news(ChatsNews.OpenAccountScreen)
+            is ChatsUiEvent.ReactionsScreenClicked -> news(ChatsNews.OpenReactionsScreen)
         }
     }
 }

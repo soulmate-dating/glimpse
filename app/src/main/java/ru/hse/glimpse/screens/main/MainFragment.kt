@@ -13,20 +13,28 @@ import ru.hse.glimpse.navigation.Screens
 import ru.hse.glimpse.screens.main.di.MainComponent
 import ru.hse.glimpse.screens.main.presentation.MainNews
 import ru.hse.glimpse.screens.main.presentation.MainUiEvent
+import ru.hse.glimpse.screens.main.presentation.MainUiEvent.CancelClicked
+import ru.hse.glimpse.screens.main.presentation.MainUiEvent.PullToRefresh
+import ru.hse.glimpse.screens.main.ui.dialogs.SendReactionBottomSheetDialog
+import ru.hse.glimpse.screens.main.ui.dialogs.SendReactionBottomSheetDialog.SendReactionBottomSheetDialogListener
 import ru.hse.glimpse.screens.main.ui.mapper.MainUiState
 import ru.hse.glimpse.screens.main.ui.recycler.MainViewHolderFactory
 import ru.hse.glimpse.utils.views.FlowFragment
+import ru.hse.glimpse.utils.views.showAlert
 import ru.tinkoff.kotea.android.lifecycle.collectOnCreate
 import ru.tinkoff.kotea.android.storeViaViewModel
 import ru.tinkoff.mobile.tech.ti_recycler.base.ViewTyped
 import ru.tinkoff.mobile.tech.ti_recycler_coroutines.TiRecyclerCoroutines
 
 @AndroidEntryPoint
-class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main) {
+class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main),
+    SendReactionBottomSheetDialogListener {
 
     private val binding by viewBinding(FragmentMainBinding::bind)
     private val store by storeViaViewModel { component.createMainStore() }
-    private lateinit var recycler : TiRecyclerCoroutines<ViewTyped>
+    private lateinit var recycler: TiRecyclerCoroutines<ViewTyped>
+
+    private lateinit var bottomSheet: SendReactionBottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +51,8 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main) {
         initToolbar()
         initBottomBar()
         initRecycler()
+        binding.swipeRefreshLayout.setOnRefreshListener { store.dispatch(PullToRefresh) }
+        binding.fab.setOnClickListener { store.dispatch(CancelClicked) }
     }
 
     @Deprecated("Deprecated in Java")
@@ -67,10 +77,17 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main) {
                     store.dispatch(MainUiEvent.ChatsScreenClicked)
                     true
                 }
+
                 R.id.account -> {
                     store.dispatch(MainUiEvent.AccountScreenClicked)
                     true
                 }
+
+                R.id.liked -> {
+                    store.dispatch(MainUiEvent.ReactionsScreenClicked)
+                    true
+                }
+
                 else -> false
             }
         }
@@ -79,7 +96,9 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main) {
     private fun initRecycler() {
         recycler = TiRecyclerCoroutines(
             binding.recycler,
-            MainViewHolderFactory(),
+            MainViewHolderFactory(
+                onPromptClicked = { store.dispatch(MainUiEvent.PromptClicked(it)) },
+            ),
         )
     }
 
@@ -96,6 +115,9 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main) {
     }
 
     private fun render(uiState: MainUiState) {
+        binding.toolbar.title = uiState.firstName ?: "Oops!.."
+        binding.swipeRefreshLayout.isRefreshing = uiState.isPullToRefreshRunning
+
         controlShimmersVisibility(uiState.isLoading)
         recycler.setItems(uiState.items)
     }
@@ -104,6 +126,33 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main) {
         when (news) {
             is MainNews.OpenChats -> router.navigateTo(Screens.ChatsScreen())
             is MainNews.OpenAccount -> router.navigateTo(Screens.AccountScreen())
+            is MainNews.OpenReactions -> router.navigateTo(Screens.ReactionsScreen())
+            is MainNews.ShowError -> {
+                if (::bottomSheet.isInitialized) {
+                    bottomSheet.isCancelable = true
+                    bottomSheet.dismiss()
+                }
+                showAlert(news.message)
+            }
+            is MainNews.OpenReactionBottomSheet -> showBottomSheet()
+            is MainNews.HideBottomSheet -> {
+                bottomSheet.isCancelable = true
+                bottomSheet.dismiss()
+                store.dispatch(CancelClicked)
+            }
         }
+    }
+
+    private fun showBottomSheet() {
+        bottomSheet = SendReactionBottomSheetDialog(listener = this)
+        bottomSheet.show(
+            parentFragmentManager,
+            SendReactionBottomSheetDialog::class.java.simpleName
+        )
+    }
+
+    override fun sendReactionClicked(comment: String) {
+        store.dispatch(MainUiEvent.ReactionSent(comment = comment))
+        bottomSheet.isCancelable = false
     }
 }

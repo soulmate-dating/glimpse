@@ -8,6 +8,7 @@ import ru.hse.glimpse.screens.in_or_up.InOrUpFragment
 import ru.hse.glimpse.screens.log_in.LogInFragment
 import ru.hse.glimpse.screens.main.MainFragment
 import ru.hse.glimpse.screens.prompts.PromptsFragment
+import ru.hse.glimpse.screens.reactions.ReactionsFragment
 import ru.hse.glimpse.screens.sign_up.SignUpFragment
 
 @Suppress("FunctionName")
@@ -28,4 +29,6 @@ object Screens {
     fun PromptsScreen() = FragmentScreen { PromptsFragment() }
 
     fun AccountScreen() = FragmentScreen { AccountFragment() }
+
+    fun ReactionsScreen() = FragmentScreen { ReactionsFragment() }
 }

@@ -6,6 +6,9 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class Profile(
 
+    @SerializedName("user_id")
+    val userId: String,
+
     @SerializedName("first_name")
     val firstName: String,
 
@@ -50,7 +53,8 @@ data class Profile(
         if (other !is Profile) return false
 
         // Compares properties for structural equality
-        return this.firstName == other.firstName
+        return this.userId == other.userId
+                && this.firstName == other.firstName
                 && this.lastName == other.lastName
                 && this.birthDate == other.birthDate
                 && this.sex == other.sex
@@ -64,7 +68,8 @@ data class Profile(
     }
 
     override fun hashCode(): Int {
-        var result = firstName.hashCode()
+        var result = userId.hashCode()
+        result = 31 * result + firstName.hashCode()
         result = 31 * result + lastName.hashCode()
         result = 31 * result + birthDate.hashCode()
         result = 31 * result + sex.hashCode()
