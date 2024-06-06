@@ -9,6 +9,7 @@ import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.LogoutClicked
 import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.MainClicked
 import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.ProfileClicked
 import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.PromptsClicked
+import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.ReactionsClicked
 import ru.tinkoff.kotea.core.dsl.DslUpdate
 
 class AccountUpdate : DslUpdate<AccountState, AccountEvent, AccountCommand, AccountNews>() {
@@ -26,6 +27,7 @@ class AccountUpdate : DslUpdate<AccountState, AccountEvent, AccountCommand, Acco
             is ChatsClicked -> news(OpenChats)
             is ProfileClicked -> news(OpenProfile)
             is PromptsClicked -> news(OpenPrompts)
+            is ReactionsClicked -> news(OpenReactions)
             is LogoutClicked -> {
                 commands(Logout)
                 news(OpenInOrUpScreen)

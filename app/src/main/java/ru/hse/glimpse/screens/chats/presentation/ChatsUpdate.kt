@@ -10,7 +10,6 @@ class ChatsUpdate : DslUpdate<ChatsState, ChatsEvent, ChatsCommand, ChatsNews>()
         }
     }
 
-
     private fun NextBuilder.handleCommandResultEvent(event: ChatsCommandResultEvent) {
         when (event) {
             is ChatsCommandResultEvent.ChatsLoaded -> state {
@@ -19,7 +18,7 @@ class ChatsUpdate : DslUpdate<ChatsState, ChatsEvent, ChatsCommand, ChatsNews>()
                     isLoading = false,
                 )
             }
-            else -> Unit
+            is ChatsCommandResultEvent.ChatsError -> news(ChatsNews.ShowError(event.message))
         }
     }
 

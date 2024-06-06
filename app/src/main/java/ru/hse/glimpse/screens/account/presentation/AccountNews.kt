@@ -5,6 +5,7 @@ sealed interface AccountNews {
     object OpenChats : AccountNews
     object OpenProfile : AccountNews
     object OpenPrompts : AccountNews
+    object OpenReactions : AccountNews
     object OpenInOrUpScreen : AccountNews
     data class ShowError(val message: String?) : AccountNews
 }
