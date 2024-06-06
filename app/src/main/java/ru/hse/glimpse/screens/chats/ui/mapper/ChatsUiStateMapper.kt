@@ -1,6 +1,6 @@
 package ru.hse.glimpse.screens.chats.ui.mapper
 
-import ru.hse.glimpse.network.api.chats.model.ChatSummary
+import ru.hse.glimpse.network.api.chats.model.ChatInfo
 import ru.hse.glimpse.screens.chats.presentation.ChatsState
 import ru.hse.glimpse.screens.chats.ui.data.ChatItem
 import ru.hse.glimpse.screens.chats.ui.data.DividerItem
@@ -44,9 +44,9 @@ class ChatsUiStateMapper : UiStateMapper<ChatsState, ChatsUiState> {
         )
     }
 
-    private fun mapToUi(summary: ChatSummary): ChatItem {
+    private fun mapToUi(summary: ChatInfo): ChatItem {
         return ChatItem(
-            imageLink = summary.companion.picLink,
+            imageLink = "https://i.ytimg.com/vi/vxXiyPgpT1Y/maxresdefault.jpg"/*summary.companion.picLink*/,
             name = summary.companion.firstName,
             lastMessage = summary.lastMessage,
         )

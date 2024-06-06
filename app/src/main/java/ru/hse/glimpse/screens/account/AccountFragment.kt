@@ -19,6 +19,7 @@ import ru.hse.glimpse.screens.account.presentation.AccountNews.OpenInOrUpScreen
 import ru.hse.glimpse.screens.account.presentation.AccountNews.OpenMain
 import ru.hse.glimpse.screens.account.presentation.AccountNews.OpenProfile
 import ru.hse.glimpse.screens.account.presentation.AccountNews.OpenPrompts
+import ru.hse.glimpse.screens.account.presentation.AccountNews.OpenReactions
 import ru.hse.glimpse.screens.account.presentation.AccountNews.ShowError
 import ru.hse.glimpse.screens.account.presentation.AccountState
 import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.ChatsClicked
@@ -26,6 +27,7 @@ import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.LogoutClicked
 import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.MainClicked
 import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.ProfileClicked
 import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.PromptsClicked
+import ru.hse.glimpse.screens.account.presentation.AccountUiEvent.ReactionsClicked
 import ru.hse.glimpse.utils.views.FlowFragment
 import ru.hse.glimpse.utils.views.showAlert
 import ru.tinkoff.kotea.android.lifecycle.collectOnCreate
@@ -102,6 +104,10 @@ class AccountFragment : FlowFragment<AccountComponent>(R.layout.fragment_account
                     store.dispatch(ChatsClicked)
                     true
                 }
+                R.id.liked -> {
+                    store.dispatch(ReactionsClicked)
+                    true
+                }
                 else -> false
             }
         }
@@ -113,6 +119,7 @@ class AccountFragment : FlowFragment<AccountComponent>(R.layout.fragment_account
             is OpenChats -> router.replaceScreen(Screens.ChatsScreen())
             is OpenProfile -> router.navigateTo(Screens.FillProfileScreen())
             is OpenPrompts -> router.navigateTo(Screens.PromptsScreen())
+            is OpenReactions -> router.navigateTo(Screens.ReactionsScreen())
             is OpenInOrUpScreen -> router.newRootScreen(Screens.InOrUpScreen())
             is ShowError -> showAlert(news.message)
         }

@@ -16,6 +16,7 @@ import ru.hse.glimpse.screens.chats.presentation.ChatsUiEvent
 import ru.hse.glimpse.screens.chats.ui.mapper.ChatsUiState
 import ru.hse.glimpse.screens.chats.ui.recycler.ChatsViewHolderFactory
 import ru.hse.glimpse.utils.views.FlowFragment
+import ru.hse.glimpse.utils.views.showAlert
 import ru.tinkoff.kotea.android.lifecycle.collectOnCreate
 import ru.tinkoff.kotea.android.storeViaViewModel
 import ru.tinkoff.mobile.tech.ti_recycler.base.ViewTyped
@@ -109,6 +110,7 @@ class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
             is ChatsNews.OpenMainScreen -> router.newRootScreen(Screens.MainScreen())
             is ChatsNews.OpenAccountScreen -> router.newRootScreen(Screens.AccountScreen())
             is ChatsNews.OpenReactionsScreen -> router.newRootScreen(Screens.ReactionsScreen())
+            is ChatsNews.ShowError -> showAlert(message = news.message)
         }
     }
 }

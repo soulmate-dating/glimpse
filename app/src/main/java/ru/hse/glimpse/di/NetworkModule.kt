@@ -21,6 +21,8 @@ import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.hse.glimpse.network.api.chats.ChatsApi
+import ru.hse.glimpse.network.api.chats.ChatsRepository
 import ru.hse.glimpse.network.api.profile.ProfileApi
 import ru.hse.glimpse.network.api.profile.ProfileRepository
 import ru.hse.glimpse.network.api.prompts.PromptsApi
@@ -224,5 +226,27 @@ object NetworkModule {
         reactionsApi: ReactionsApi,
     ): ReactionsRepository {
         return ReactionsRepository(reactionsApi)
+    }
+
+    @Provides
+    @Singleton
+    fun provideChatsApi(
+        @AuthenticatedClient okHttpClient: OkHttpClient,
+    ): ChatsApi {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL_GOVNO)
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+            .create(ChatsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideChatsRepository(
+        chatsApi: ChatsApi,
+    ): ChatsRepository {
+        return ChatsRepository(chatsApi)
     }
 }

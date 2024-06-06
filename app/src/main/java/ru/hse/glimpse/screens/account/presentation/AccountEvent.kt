@@ -14,5 +14,6 @@ sealed interface AccountUiEvent : AccountEvent {
     object ChatsClicked : AccountUiEvent
     object ProfileClicked : AccountUiEvent
     object PromptsClicked : AccountUiEvent
+    object ReactionsClicked : AccountUiEvent
     object LogoutClicked : AccountUiEvent
 }

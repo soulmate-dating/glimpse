@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ru.hse.glimpse.network.api.chats.ChatsRepository
 import ru.hse.glimpse.network.api.profile.ProfileRepository
 import ru.hse.glimpse.network.api.prompts.PromptsRepository
 import ru.hse.glimpse.network.api.reactions.ReactionsRepository
@@ -101,8 +102,12 @@ internal class ComponentsModule {
 
     @Provides
     @Singleton
-    fun provideChatsComponent(): ChatsComponent {
-        return object : ChatsComponent(), ChatsModule by ChatsModule() {}
+    fun provideChatsComponent(
+        userInfoManager: UserInfoManager,
+        chatsRepository: ChatsRepository
+    ): ChatsComponent {
+        return object : ChatsComponent(),
+            ChatsModule by ChatsModule(userInfoManager, chatsRepository) {}
     }
 
     @Provides
