@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:background="#FFFFFF"
             android:gravity="center_vertical">
 
@@ -31,7 +31,7 @@
                 android:fontFeatureSettings="liga 0"
                 android:padding="20dp"
                 android:textSize="14sp"
-                tools:text="Life out-take" />
+                tools:text="why me?" />
 
         </LinearLayout>
 
@@ -54,6 +54,7 @@
         android:backgroundTint="#ffffff"
         android:contentDescription="@null"
         app:fabCustomSize="48dp"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         app:srcCompat="@drawable/icon_like_outlined" />
 
 </com.google.android.material.card.MaterialCardView>

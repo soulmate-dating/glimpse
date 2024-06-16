@@ -21,6 +21,7 @@ data class Reaction(
         val firstName: String,
         @SerializedName("second_name")
         val secondName: String,
+        @SerializedName("avatar_link")
         val avatarLink: String,
     )
 }

@@ -140,6 +140,7 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main),
                 bottomSheet.dismiss()
                 store.dispatch(CancelClicked)
             }
+            is MainNews.ScrollToTopOfScreen -> binding.recycler.smoothScrollToPosition(0)
         }
     }
 

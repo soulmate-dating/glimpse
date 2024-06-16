@@ -20,12 +20,15 @@ class MainUpdate : DslUpdate<MainState, MainEvent, MainCommand, MainNews>() {
 
     private fun NextBuilder.handleCommandResultEvent(event: MainCommandResultEvent) {
         when (event) {
-            is LoadRecommendationSuccess -> state {
-                copy(
-                    fullProfile = event.fullProfile,
-                    isLoading = false,
-                    isPullToRefreshRunning = false,
-                )
+            is LoadRecommendationSuccess -> {
+                state {
+                    copy(
+                        fullProfile = event.fullProfile,
+                        isLoading = false,
+                        isPullToRefreshRunning = false,
+                    )
+                }
+                news(MainNews.ScrollToTopOfScreen)
             }
             is LoadRecommendationError -> news(ShowError(event.message))
             is SendReactionSuccess -> news(HideBottomSheet)

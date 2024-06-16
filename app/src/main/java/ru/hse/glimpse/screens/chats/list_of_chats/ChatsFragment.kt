@@ -1,4 +1,4 @@
-package ru.hse.glimpse.screens.chats
+package ru.hse.glimpse.screens.chats.list_of_chats
 
 import android.os.Bundle
 import android.view.Menu
@@ -10,11 +10,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.hse.glimpse.R
 import ru.hse.glimpse.databinding.FragmentChatsBinding
 import ru.hse.glimpse.navigation.Screens
-import ru.hse.glimpse.screens.chats.di.ChatsComponent
-import ru.hse.glimpse.screens.chats.presentation.ChatsNews
-import ru.hse.glimpse.screens.chats.presentation.ChatsUiEvent
-import ru.hse.glimpse.screens.chats.ui.mapper.ChatsUiState
-import ru.hse.glimpse.screens.chats.ui.recycler.ChatsViewHolderFactory
+import ru.hse.glimpse.screens.chats.list_of_chats.di.ChatsComponent
+import ru.hse.glimpse.screens.chats.list_of_chats.presentation.ChatsNews
+import ru.hse.glimpse.screens.chats.list_of_chats.presentation.ChatsUiEvent
+import ru.hse.glimpse.screens.chats.list_of_chats.ui.mapper.ChatsUiState
+import ru.hse.glimpse.screens.chats.list_of_chats.ui.recycler.ChatsViewHolderFactory
 import ru.hse.glimpse.utils.views.FlowFragment
 import ru.hse.glimpse.utils.views.showAlert
 import ru.tinkoff.kotea.android.lifecycle.collectOnCreate
@@ -27,7 +27,7 @@ class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
 
     private val binding by viewBinding(FragmentChatsBinding::bind)
     private val store by storeViaViewModel { component.createChatsStore() }
-    private lateinit var recycler : TiRecyclerCoroutines<ViewTyped>
+    private lateinit var recycler: TiRecyclerCoroutines<ViewTyped>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,17 @@ class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
     private fun initRecycler() {
         recycler = TiRecyclerCoroutines(
             binding.recycler,
-            ChatsViewHolderFactory(),
+            ChatsViewHolderFactory(
+                onChatClickListener = {
+                    store.dispatch(
+                        ChatsUiEvent.ChatClicked(
+                            it.companion.id,
+                            it.companion.firstName,
+                            it.companion.picLink,
+                        )
+                    )
+                },
+            ),
         )
     }
 
@@ -75,14 +85,17 @@ class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
                     store.dispatch(ChatsUiEvent.MainScreenClicked)
                     true
                 }
+
                 R.id.account -> {
                     store.dispatch(ChatsUiEvent.AccountClicked)
                     true
                 }
+
                 R.id.liked -> {
                     store.dispatch(ChatsUiEvent.ReactionsScreenClicked)
                     true
                 }
+
                 else -> false
             }
         }
@@ -110,6 +123,14 @@ class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
             is ChatsNews.OpenMainScreen -> router.newRootScreen(Screens.MainScreen())
             is ChatsNews.OpenAccountScreen -> router.newRootScreen(Screens.AccountScreen())
             is ChatsNews.OpenReactionsScreen -> router.newRootScreen(Screens.ReactionsScreen())
+            is ChatsNews.OpenDialogScreen -> router.navigateTo(
+                Screens.DialogScreen(
+                    news.companionId,
+                    news.companionName,
+                    news.avatarLink,
+                )
+            )
+
             is ChatsNews.ShowError -> showAlert(message = news.message)
         }
     }

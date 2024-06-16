@@ -1,4 +1,4 @@
-package ru.hse.glimpse.screens.chats.presentation
+package ru.hse.glimpse.screens.chats.list_of_chats.presentation
 
 import ru.hse.glimpse.network.api.chats.model.ChatInfo
 
@@ -13,4 +13,9 @@ sealed interface ChatsUiEvent : ChatsEvent {
     object MainScreenClicked : ChatsUiEvent
     object AccountClicked : ChatsUiEvent
     object ReactionsScreenClicked : ChatsUiEvent
+    data class ChatClicked(
+        val companionId: String,
+        val companionName: String,
+        val avatarLink: String
+    ) : ChatsUiEvent
 }

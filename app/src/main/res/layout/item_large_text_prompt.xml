@@ -29,11 +29,11 @@
 
         <TextView
             android:id="@+id/text_prompt_answer"
-            android:paddingTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/along_sanss2_medium"
             android:fontFeatureSettings="liga 0"
+            android:paddingTop="8dp"
             android:textSize="26sp"
             tools:text="Being tortured with a Scorcese movie" />
 
@@ -48,6 +48,7 @@
         android:backgroundTint="#ffffff"
         android:contentDescription="@null"
         app:fabCustomSize="48dp"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         app:srcCompat="@drawable/icon_like_outlined" />
 
 </com.google.android.material.card.MaterialCardView>

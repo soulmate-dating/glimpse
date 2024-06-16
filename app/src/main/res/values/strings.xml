@@ -58,4 +58,6 @@
     <string name="your_comment">Your comment</string>
     <string name="send">Send</string>
     <string name="reply">Reply</string>
+
+    <string name="send_message">Send message</string>
 </resources>

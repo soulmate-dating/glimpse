@@ -19,7 +19,7 @@ data class ChatInfo(
     @Keep
     data class Companion(
 
-        @SerializedName("text")
+        @SerializedName("id")
         val id: String,
 
         @SerializedName("first_name")

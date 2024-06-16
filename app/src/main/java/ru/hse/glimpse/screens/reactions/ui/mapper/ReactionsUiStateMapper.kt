@@ -17,7 +17,7 @@ class ReactionsUiStateMapper : UiStateMapper<ReactionsState, ReactionsUiState> {
     private fun mapToUi(reaction: Reaction): ImageReactionItem {
         return ImageReactionItem(
             comment = reaction.comment,
-            avatarLink = "https://i.ytimg.com/vi/vxXiyPgpT1Y/maxresdefault.jpg"/*reaction.sender.avatarLink*/,
+            avatarLink = reaction.sender.avatarLink,
             firstName = reaction.sender.firstName,
             reaction = reaction,
         )

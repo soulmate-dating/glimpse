@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/along_sanss2_regular"
+            android:fontFeatureSettings="liga 0"
             android:text="@string/sign_in_description"
             android:textSize="18sp" />
 
@@ -67,8 +68,8 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            style="@style/primaryButton"
             android:id="@+id/login"
+            style="@style/primaryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

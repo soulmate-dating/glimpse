@@ -1,4 +1,4 @@
-package ru.hse.glimpse.screens.chats.presentation.command_handlers
+package ru.hse.glimpse.screens.chats.list_of_chats.presentation.command_handlers
 
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.suspendOnFailure
@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.transform
 import ru.hse.glimpse.network.api.chats.ChatsRepository
-import ru.hse.glimpse.screens.chats.presentation.ChatsCommand
-import ru.hse.glimpse.screens.chats.presentation.ChatsCommandResultEvent
-import ru.hse.glimpse.screens.chats.presentation.ChatsEvent
+import ru.hse.glimpse.screens.chats.list_of_chats.presentation.ChatsCommand
+import ru.hse.glimpse.screens.chats.list_of_chats.presentation.ChatsCommandResultEvent
+import ru.hse.glimpse.screens.chats.list_of_chats.presentation.ChatsEvent
 import ru.hse.glimpse.utils.user_info.UserInfoManager
 import ru.tinkoff.kotea.core.CommandsFlowHandler
 

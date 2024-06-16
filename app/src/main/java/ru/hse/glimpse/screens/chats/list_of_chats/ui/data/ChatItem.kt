@@ -1,18 +1,20 @@
-package ru.hse.glimpse.screens.chats.ui.data
+package ru.hse.glimpse.screens.chats.list_of_chats.ui.data
 
 import android.view.View
 import coil.load
 import coil.transform.CircleCropTransformation
 import ru.hse.glimpse.R
 import ru.hse.glimpse.databinding.ItemChatBinding
+import ru.hse.glimpse.network.api.chats.model.ChatInfo
 import ru.tinkoff.mobile.tech.ti_recycler.base.BaseViewHolder
 import ru.tinkoff.mobile.tech.ti_recycler.base.ViewTyped
 import ru.tinkoff.mobile.tech.ti_recycler.clicks.TiRecyclerClickListener
 
 data class ChatItem(
-    val imageLink: String = "https://www.pngall.com/wp-content/uploads/2/Leonardo-Dicaprio.png",
+    val imageLink: String,
     val name: String = "Leo",
     val lastMessage: String = "Wanna see my Oscar?",
+    val chatInfo: ChatInfo,
 ) : ViewTyped {
 
     override val uid: String
@@ -24,7 +26,8 @@ data class ChatItem(
 
 class ChatsViewHolder(
     view: View,
-    clicks: TiRecyclerClickListener
+    clicks: TiRecyclerClickListener,
+    private val onChatClickListener: (ChatInfo) -> Unit,
 ) : BaseViewHolder<ChatItem>(view, clicks) {
 
     private val binding = ItemChatBinding.bind(view)
@@ -37,5 +40,6 @@ class ChatsViewHolder(
         }
         binding.name.text = item.name
         binding.lastMessage.text = item.lastMessage
+        binding.root.setOnClickListener { onChatClickListener(item.chatInfo) }
     }
 }

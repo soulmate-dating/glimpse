@@ -1,10 +1,10 @@
-package ru.hse.glimpse.screens.chats.ui.mapper
+package ru.hse.glimpse.screens.chats.list_of_chats.ui.mapper
 
 import ru.hse.glimpse.network.api.chats.model.ChatInfo
-import ru.hse.glimpse.screens.chats.presentation.ChatsState
-import ru.hse.glimpse.screens.chats.ui.data.ChatItem
-import ru.hse.glimpse.screens.chats.ui.data.DividerItem
-import ru.hse.glimpse.screens.chats.ui.data.TurnItem
+import ru.hse.glimpse.screens.chats.list_of_chats.presentation.ChatsState
+import ru.hse.glimpse.screens.chats.list_of_chats.ui.data.ChatItem
+import ru.hse.glimpse.screens.chats.list_of_chats.ui.data.DividerItem
+import ru.hse.glimpse.screens.chats.list_of_chats.ui.data.TurnItem
 import ru.tinkoff.kotea.android.ui.ResourcesProvider
 import ru.tinkoff.kotea.android.ui.UiStateMapper
 
@@ -46,9 +46,10 @@ class ChatsUiStateMapper : UiStateMapper<ChatsState, ChatsUiState> {
 
     private fun mapToUi(summary: ChatInfo): ChatItem {
         return ChatItem(
-            imageLink = "https://i.ytimg.com/vi/vxXiyPgpT1Y/maxresdefault.jpg"/*summary.companion.picLink*/,
+            imageLink = summary.companion.picLink,
             name = summary.companion.firstName,
             lastMessage = summary.lastMessage,
+            chatInfo = summary,
         )
     }
 }

@@ -1,4 +1,4 @@
-package ru.hse.glimpse.screens.chats.presentation
+package ru.hse.glimpse.screens.chats.list_of_chats.presentation
 
 import ru.tinkoff.kotea.core.dsl.DslUpdate
 
@@ -27,6 +27,13 @@ class ChatsUpdate : DslUpdate<ChatsState, ChatsEvent, ChatsCommand, ChatsNews>()
             is ChatsUiEvent.MainScreenClicked -> news(ChatsNews.OpenMainScreen)
             is ChatsUiEvent.AccountClicked -> news(ChatsNews.OpenAccountScreen)
             is ChatsUiEvent.ReactionsScreenClicked -> news(ChatsNews.OpenReactionsScreen)
+            is ChatsUiEvent.ChatClicked -> news(
+                ChatsNews.OpenDialogScreen(
+                    companionId = event.companionId,
+                    companionName = event.companionName,
+                    avatarLink = event.avatarLink,
+                )
+            )
         }
     }
 }

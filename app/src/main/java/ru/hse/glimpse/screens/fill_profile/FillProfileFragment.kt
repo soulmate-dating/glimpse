@@ -62,8 +62,8 @@ class FillProfileFragment : FlowFragment<FillProfileComponent>(R.layout.fragment
                     FillProfileUiEvent.SaveClicked(
                         Profile(
                             userId = "",
-                            firstName = binding.name.editText!!.text.toString().lowercase(),
-                            lastName = binding.surname.editText!!.text.toString().lowercase(),
+                            firstName = binding.name.editText!!.text.toString(),
+                            lastName = binding.surname.editText!!.text.toString(),
                             birthDate = binding.date.editText!!.text.toString().lowercase(),
                             sex = binding.sex.editText!!.text.toString().lowercase(),
                             preference = binding.preferredPartner.editText!!.text.toString()

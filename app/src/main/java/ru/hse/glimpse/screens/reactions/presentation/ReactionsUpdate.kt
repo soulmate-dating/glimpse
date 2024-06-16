@@ -14,7 +14,7 @@ class ReactionsUpdate : DslUpdate<ReactionsState, ReactionsEvent, ReactionsComma
         when (event) {
             is ReactionsUiEvent.MainScreenClicked -> news(ReactionsNews.OpenMain)
             is ReactionsUiEvent.ChatsScreenClicked -> news(ReactionsNews.OpenChats)
-            is ReactionsUiEvent.AccountScreenClicked -> news(ReactionsNews.OpenMain)
+            is ReactionsUiEvent.AccountScreenClicked -> news(ReactionsNews.OpenAccount)
             is ReactionsUiEvent.SkipReaction -> {
                 commands(ReactionsCommand.SkipReaction(event.reaction.id))
             }

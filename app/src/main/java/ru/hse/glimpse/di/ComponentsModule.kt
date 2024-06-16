@@ -14,8 +14,10 @@ import ru.hse.glimpse.network.api.unauthorized.AuthRepository
 import ru.hse.glimpse.network.common.token.JwtTokenManager
 import ru.hse.glimpse.screens.account.di.AccountComponent
 import ru.hse.glimpse.screens.account.di.AccountModule
-import ru.hse.glimpse.screens.chats.di.ChatsComponent
-import ru.hse.glimpse.screens.chats.di.ChatsModule
+import ru.hse.glimpse.screens.chats.dialog.di.DialogComponent
+import ru.hse.glimpse.screens.chats.dialog.di.DialogModule
+import ru.hse.glimpse.screens.chats.list_of_chats.di.ChatsComponent
+import ru.hse.glimpse.screens.chats.list_of_chats.di.ChatsModule
 import ru.hse.glimpse.screens.entrypoint.di.EntrypointComponent
 import ru.hse.glimpse.screens.entrypoint.di.EntrypointModule
 import ru.hse.glimpse.screens.fill_profile.di.FillProfileComponent
@@ -156,5 +158,11 @@ internal class ComponentsModule {
     ): ReactionsComponent {
         return object : ReactionsComponent(),
             ReactionsModule by ReactionsModule(userInfoManager, reactionsRepository) {}
+    }
+
+    @Provides
+    @Singleton
+    fun provideDialogComponent(): DialogComponent {
+        return object : DialogModule by DialogModule(), DialogComponent() {}
     }
 }

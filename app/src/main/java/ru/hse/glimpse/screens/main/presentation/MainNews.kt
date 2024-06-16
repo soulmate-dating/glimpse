@@ -7,4 +7,5 @@ sealed interface MainNews {
     data class ShowError(val message: String?) : MainNews
     object OpenReactionBottomSheet : MainNews
     object HideBottomSheet : MainNews
+    object ScrollToTopOfScreen : MainNews
 }

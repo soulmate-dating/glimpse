@@ -7,9 +7,6 @@ import androidx.core.net.toUri
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
-import id.zelory.compressor.Compressor
-import id.zelory.compressor.constraint.quality
-import id.zelory.compressor.constraint.size
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.transform
@@ -73,11 +70,7 @@ class PostPromptCommandHandler(
                             MultipartBody.Part.createFormData(
                                 "file",
                                 file.name,
-                                Compressor.compress(context, file) {
-                                    quality(75)
-                                    size(2_097_152) // 2 MB
-                                }
-                                    .asRequestBody("image/*".toMediaType()),
+                                file.asRequestBody("image/*".toMediaType()),
                             )
 
                         promptsRepository.postImagePrompt(

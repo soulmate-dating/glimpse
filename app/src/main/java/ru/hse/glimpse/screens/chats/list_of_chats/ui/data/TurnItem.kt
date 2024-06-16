@@ -1,4 +1,4 @@
-package ru.hse.glimpse.screens.chats.ui.data
+package ru.hse.glimpse.screens.chats.list_of_chats.ui.data
 
 import android.view.View
 import ru.hse.glimpse.R
