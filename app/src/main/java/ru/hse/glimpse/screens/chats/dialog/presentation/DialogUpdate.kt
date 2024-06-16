@@ -12,12 +12,31 @@ class DialogUpdate : DslUpdate<DialogState, DialogEvent, DialogCommand, DialogNe
 
     private fun NextBuilder.handleUiEvent(event: DialogUiEvent) {
         when (event) {
-            is DialogUiEvent.OnInit -> Unit
+            is DialogUiEvent.OnInit -> {
+                state { copy(companionId = event.companionId) }
+                commands(DialogCommand.GetMessages(companionId = event.companionId))
+            }
+            is DialogUiEvent.GetMessages -> {
+                state { copy(companionId = event.companionId) }
+                commands(DialogCommand.GetMessages(companionId = event.companionId))
+            }
             is DialogUiEvent.BackClicked -> news(DialogNews.NavigateBack)
+            is DialogUiEvent.SendMessage -> commands(
+                DialogCommand.SendMessage(companionId = state.companionId!!, message = event.content)
+            )
         }
     }
 
-    private fun handleCommandResultEvent(event: DialogCommandResultEvent) {
-        TODO("Not yet implemented")
+    private fun NextBuilder.handleCommandResultEvent(event: DialogCommandResultEvent) {
+        when (event) {
+            is DialogCommandResultEvent.GetMessagesSuccess -> {
+                state { copy(messagesResponse = event.messagesResponse) }
+            }
+            is DialogCommandResultEvent.GetMessagesError -> news(DialogNews.ShowError(event.message))
+            is DialogCommandResultEvent.SendMessagesSuccess -> commands(
+                DialogCommand.GetMessages(companionId = state.companionId!!)
+            )
+            is DialogCommandResultEvent.SendMessagesError -> news(DialogNews.ShowError(event.message))
+        }
     }
 }

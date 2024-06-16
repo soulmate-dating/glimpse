@@ -18,4 +18,5 @@ sealed interface ChatsUiEvent : ChatsEvent {
         val companionName: String,
         val avatarLink: String
     ) : ChatsUiEvent
+    object LoadChatsOnResume : ChatsUiEvent
 }

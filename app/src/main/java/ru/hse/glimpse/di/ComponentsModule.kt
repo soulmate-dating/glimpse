@@ -162,7 +162,11 @@ internal class ComponentsModule {
 
     @Provides
     @Singleton
-    fun provideDialogComponent(): DialogComponent {
-        return object : DialogModule by DialogModule(), DialogComponent() {}
+    fun provideDialogComponent(
+        userInfoManager: UserInfoManager,
+        chatsRepository: ChatsRepository,
+    ): DialogComponent {
+        return object : DialogModule by DialogModule(userInfoManager, chatsRepository),
+            DialogComponent() {}
     }
 }

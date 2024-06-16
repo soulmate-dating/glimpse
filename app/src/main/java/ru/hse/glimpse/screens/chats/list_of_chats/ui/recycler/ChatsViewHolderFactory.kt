@@ -6,6 +6,7 @@ import ru.hse.glimpse.network.api.chats.model.ChatInfo
 import ru.hse.glimpse.screens.chats.list_of_chats.ui.data.ChatsViewHolder
 import ru.hse.glimpse.screens.chats.list_of_chats.ui.data.DividerViewHolder
 import ru.hse.glimpse.screens.chats.list_of_chats.ui.data.TurnViewHolder
+import ru.hse.glimpse.screens.common.recycler.items.EmptyStateViewHolder
 import ru.tinkoff.mobile.tech.ti_recycler.base.BaseViewHolder
 import ru.tinkoff.mobile.tech.ti_recycler_coroutines.base.CoroutinesHolderFactory
 
@@ -22,6 +23,7 @@ class ChatsViewHolderFactory(
             )
             R.layout.item_turn -> TurnViewHolder(view)
             R.layout.item_divider_chats -> DividerViewHolder(view)
+            R.layout.item_empty_state -> EmptyStateViewHolder(view)
             else -> null
         }
     }

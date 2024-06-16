@@ -24,7 +24,7 @@ fun ChatsModule(
         override fun createChatsStore(): ChatsStore {
             return KoteaStore(
                 initialState = ChatsState(isLoading = true),
-                initialCommands = listOf(ChatsCommand.LoadChats),
+                initialCommands = emptyList(),
                 commandsFlowHandlers = listOf(
                     LoadChatsCommandHandler(userInfoManager, chatsRepository),
                 ),

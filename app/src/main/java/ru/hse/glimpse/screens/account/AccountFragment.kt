@@ -1,11 +1,12 @@
 package ru.hse.glimpse.screens.account
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import coil.transform.CircleCropTransformation
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +37,9 @@ import ru.tinkoff.kotea.android.storeViaViewModel
 @AndroidEntryPoint
 class AccountFragment : FlowFragment<AccountComponent>(R.layout.fragment_account) {
 
-    private val binding by viewBinding(FragmentAccountBinding::bind)
+    private var _binding: FragmentAccountBinding? = null
+    private val binding get() = _binding!!
+
     private val store by storeViaViewModel { component.createAccountStore() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,11 +51,26 @@ class AccountFragment : FlowFragment<AccountComponent>(R.layout.fragment_account
         )
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentAccountBinding.inflate(inflater, container, false)
+        binding.bottomNavigation.selectedItemId = R.id.account
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
         initBottomBar()
         initViews()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun render(state: AccountState) {
@@ -92,9 +110,7 @@ class AccountFragment : FlowFragment<AccountComponent>(R.layout.fragment_account
     }
 
     private fun initBottomBar() {
-        binding.bottomNavigation.selectedItemId = R.id.account
-
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.main -> {
                     store.dispatch(MainClicked)

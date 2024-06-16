@@ -3,6 +3,7 @@ package ru.hse.glimpse.screens.chats.list_of_chats.presentation.command_handlers
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.transform
@@ -20,6 +21,8 @@ class LoadChatsCommandHandler(
 
     override fun handle(commands: Flow<ChatsCommand>): Flow<ChatsEvent> {
         return commands.filterIsInstance<ChatsCommand.LoadChats>().transform {
+            delay(250)
+
             val userId = userInfoManager.getUserId() ?: ""
             chatsRepository.getCompanions(userId)
                 .suspendOnSuccess { emit(ChatsCommandResultEvent.ChatsLoaded(this.data)) }
