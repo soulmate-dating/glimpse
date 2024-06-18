@@ -1,11 +1,12 @@
 package ru.hse.glimpse.screens.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ru.hse.glimpse.R
 import ru.hse.glimpse.databinding.FragmentMainBinding
@@ -30,7 +31,9 @@ import ru.tinkoff.mobile.tech.ti_recycler_coroutines.TiRecyclerCoroutines
 class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main),
     SendReactionBottomSheetDialogListener {
 
-    private val binding by viewBinding(FragmentMainBinding::bind)
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
+
     private val store by storeViaViewModel { component.createMainStore() }
     private lateinit var recycler: TiRecyclerCoroutines<ViewTyped>
 
@@ -46,6 +49,16 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main),
         )
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding.bottomNavigation.selectedItemId = R.id.main
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
@@ -53,6 +66,11 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main),
         initRecycler()
         binding.swipeRefreshLayout.setOnRefreshListener { store.dispatch(PullToRefresh) }
         binding.fab.setOnClickListener { store.dispatch(CancelClicked) }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @Deprecated("Deprecated in Java")
@@ -69,9 +87,7 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main),
     }
 
     private fun initBottomBar() {
-        binding.bottomNavigation.selectedItemId = R.id.main
-
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.chats -> {
                     store.dispatch(MainUiEvent.ChatsScreenClicked)
@@ -115,7 +131,7 @@ class MainFragment : FlowFragment<MainComponent>(R.layout.fragment_main),
     }
 
     private fun render(uiState: MainUiState) {
-        binding.toolbar.title = uiState.firstName ?: "Oops!.."
+        binding.toolbar.title = uiState.firstName
         binding.swipeRefreshLayout.isRefreshing = uiState.isPullToRefreshRunning
 
         controlShimmersVisibility(uiState.isLoading)

@@ -7,14 +7,13 @@
     android:background="#fff"
     tools:context=".EntrypointActivity">
 
-
-    <ImageView
-        android:src="@drawable/ic_laucnher"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:src="@drawable/entrypoint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

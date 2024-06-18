@@ -34,6 +34,10 @@ class ChatsUpdate : DslUpdate<ChatsState, ChatsEvent, ChatsCommand, ChatsNews>()
                     avatarLink = event.avatarLink,
                 )
             )
+            is ChatsUiEvent.LoadChatsOnResume -> {
+                state { copy(isLoading = true) }
+                commands(ChatsCommand.LoadChats)
+            }
         }
     }
 }

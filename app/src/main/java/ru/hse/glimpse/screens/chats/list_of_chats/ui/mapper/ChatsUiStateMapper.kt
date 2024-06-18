@@ -1,17 +1,27 @@
 package ru.hse.glimpse.screens.chats.list_of_chats.ui.mapper
 
+import ru.hse.glimpse.R
 import ru.hse.glimpse.network.api.chats.model.ChatInfo
 import ru.hse.glimpse.screens.chats.list_of_chats.presentation.ChatsState
 import ru.hse.glimpse.screens.chats.list_of_chats.ui.data.ChatItem
 import ru.hse.glimpse.screens.chats.list_of_chats.ui.data.DividerItem
 import ru.hse.glimpse.screens.chats.list_of_chats.ui.data.TurnItem
+import ru.hse.glimpse.screens.common.recycler.items.EmptyStateItem
 import ru.tinkoff.kotea.android.ui.ResourcesProvider
 import ru.tinkoff.kotea.android.ui.UiStateMapper
 
 class ChatsUiStateMapper : UiStateMapper<ChatsState, ChatsUiState> {
     override fun ResourcesProvider.map(state: ChatsState): ChatsUiState {
         val items = buildList {
-            if (state.items.isEmpty()) return@buildList
+            if (state.items.isEmpty()) {
+                add(
+                    EmptyStateItem(
+                        mainMessage = getString(R.string.no_matches_yet),
+                        imageRes = R.mipmap.empty_chats_state_image,
+                    )
+                )
+                return@buildList
+            }
 
             val yourTurnChats = state.items.filter { it.isYourTurn }
             val theirTurnAmount = state.items - yourTurnChats.toSet()

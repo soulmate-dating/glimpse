@@ -3,6 +3,7 @@ package ru.hse.glimpse.screens.main.presentation.command_handlers
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.transform
@@ -21,6 +22,8 @@ class LoadRecommendationCommandHandler(
 ) : CommandsFlowHandler<MainCommand, MainEvent> {
     override fun handle(commands: Flow<MainCommand>): Flow<MainEvent> {
         return commands.filterIsInstance<LoadRecommendation>().transform {
+            delay(250)
+
             val userId = userInfoManager.getUserId() ?: ""
             profileRepository.getRecommendation(userId)
                 .suspendOnSuccess { emit(LoadRecommendationSuccess(this.data.data)) }

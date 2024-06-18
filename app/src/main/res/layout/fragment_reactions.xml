@@ -44,11 +44,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-            <include layout="@layout/shimmer_item_chat" />
+            <include layout="@layout/shimmer_item_reactions" />
 
-            <include layout="@layout/shimmer_item_chat" />
+            <include layout="@layout/shimmer_item_reactions" />
 
-            <include layout="@layout/shimmer_item_chat" />
+            <include layout="@layout/shimmer_item_reactions" />
 
         </LinearLayout>
 

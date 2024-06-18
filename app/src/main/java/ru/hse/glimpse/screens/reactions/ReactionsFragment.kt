@@ -1,8 +1,9 @@
 package ru.hse.glimpse.screens.reactions
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import by.kirich1409.viewbindingdelegate.viewBinding
+import android.view.ViewGroup
 import dagger.hilt.android.AndroidEntryPoint
 import ru.hse.glimpse.R
 import ru.hse.glimpse.databinding.FragmentReactionsBinding
@@ -25,7 +26,9 @@ import ru.tinkoff.mobile.tech.ti_recycler_coroutines.TiRecyclerCoroutines
 class ReactionsFragment : FlowFragment<ReactionsComponent>(R.layout.fragment_reactions),
     ReplyOnReactionBottomSheetDialogListener {
 
-    private val binding by viewBinding(FragmentReactionsBinding::bind)
+    private var _binding: FragmentReactionsBinding? = null
+    private val binding get() = _binding!!
+
     private val store by storeViaViewModel { component.createReactionsStore() }
     private lateinit var recycler: TiRecyclerCoroutines<ViewTyped>
 
@@ -41,10 +44,25 @@ class ReactionsFragment : FlowFragment<ReactionsComponent>(R.layout.fragment_rea
         )
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentReactionsBinding.inflate(inflater, container, false)
+        binding.bottomNavigation.selectedItemId = R.id.liked
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBottomBar()
         initRecycler()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun initRecycler() {
@@ -58,8 +76,7 @@ class ReactionsFragment : FlowFragment<ReactionsComponent>(R.layout.fragment_rea
     }
 
     private fun initBottomBar() {
-        binding.bottomNavigation.selectedItemId = R.id.liked
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.main -> {
                     store.dispatch(ReactionsUiEvent.MainScreenClicked)
@@ -95,7 +112,7 @@ class ReactionsFragment : FlowFragment<ReactionsComponent>(R.layout.fragment_rea
 
     private fun render(uiState: ReactionsUiState) {
         controlShimmersVisibility(uiState.isLoading)
-        recycler.setItems(uiState.reactions)
+        recycler.setItems(uiState.items)
     }
 
     private fun handleNews(news: ReactionsNews) {

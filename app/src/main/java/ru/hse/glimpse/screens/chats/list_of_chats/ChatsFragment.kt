@@ -1,11 +1,12 @@
 package ru.hse.glimpse.screens.chats.list_of_chats
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ru.hse.glimpse.R
 import ru.hse.glimpse.databinding.FragmentChatsBinding
@@ -25,7 +26,9 @@ import ru.tinkoff.mobile.tech.ti_recycler_coroutines.TiRecyclerCoroutines
 @AndroidEntryPoint
 class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
 
-    private val binding by viewBinding(FragmentChatsBinding::bind)
+    private var _binding: FragmentChatsBinding? = null
+    private val binding get() = _binding!!
+
     private val store by storeViaViewModel { component.createChatsStore() }
     private lateinit var recycler: TiRecyclerCoroutines<ViewTyped>
 
@@ -39,11 +42,31 @@ class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
         )
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentChatsBinding.inflate(inflater, container, false)
+        binding.bottomNavigation.selectedItemId = R.id.chats
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
         initBottomBar()
         initRecycler()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        store.dispatch(ChatsUiEvent.LoadChatsOnResume)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @Deprecated("Deprecated in Java")
@@ -77,9 +100,7 @@ class ChatsFragment : FlowFragment<ChatsComponent>(R.layout.fragment_chats) {
     }
 
     private fun initBottomBar() {
-        binding.bottomNavigation.selectedItemId = R.id.chats
-
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.main -> {
                     store.dispatch(ChatsUiEvent.MainScreenClicked)

@@ -47,14 +47,14 @@ class FillProfileFragment : FlowFragment<FillProfileComponent>(R.layout.fragment
                 binding.name.editText?.text.isNullOrEmpty() ||
                 binding.surname.editText?.text.isNullOrEmpty() ||
                 binding.date.editText?.text.isNullOrEmpty() ||
-                binding.sex.editText?.text.isNullOrEmpty() ||
-                binding.preferredPartner.editText?.text.isNullOrEmpty() ||
-                binding.intention.editText?.text.isNullOrEmpty() ||
+                binding.sex.text.isNullOrEmpty() ||
+                binding.preferredPartner.text.isNullOrEmpty() ||
+                binding.intention.text.isNullOrEmpty() ||
                 binding.height.editText?.text.isNullOrEmpty() ||
-                binding.hasChildren.editText?.text.isNullOrEmpty() ||
-                binding.familyPlans.editText?.text.isNullOrEmpty() ||
-                binding.drinksAlcohol.editText?.text.isNullOrEmpty() ||
-                binding.smokes.editText?.text.isNullOrEmpty()
+                binding.hasChildren.text.isNullOrEmpty() ||
+                binding.familyPlans.text.isNullOrEmpty() ||
+                binding.drinksAlcohol.text.isNullOrEmpty() ||
+                binding.smokes.text.isNullOrEmpty()
             ) {
                 showAlert("Fill whole profile before saving!")
             } else {
@@ -65,18 +65,18 @@ class FillProfileFragment : FlowFragment<FillProfileComponent>(R.layout.fragment
                             firstName = binding.name.editText!!.text.toString(),
                             lastName = binding.surname.editText!!.text.toString(),
                             birthDate = binding.date.editText!!.text.toString().lowercase(),
-                            sex = binding.sex.editText!!.text.toString().lowercase(),
-                            preference = binding.preferredPartner.editText!!.text.toString()
+                            sex = binding.sex.text.toString().lowercase(),
+                            preference = binding.preferredPartner.text.toString()
                                 .lowercase(),
-                            intention = binding.intention.editText!!.text.toString().lowercase(),
+                            intention = binding.intention.text.toString().lowercase(),
                             height = binding.height.editText!!.text.toString().toInt(),
-                            hasChildren = binding.hasChildren.editText!!.text.toString()
+                            hasChildren = binding.hasChildren.text.toString()
                                 .lowercase() == "yes",
-                            familyPlans = binding.familyPlans.editText!!.text.toString()
+                            familyPlans = binding.familyPlans.text.toString()
                                 .lowercase(),
-                            drinksAlcohol = binding.drinksAlcohol.editText!!.text.toString()
+                            drinksAlcohol = binding.drinksAlcohol.text.toString()
                                 .lowercase(),
-                            smokes = binding.smokes.editText!!.text.toString().lowercase(),
+                            smokes = binding.smokes.text.toString().lowercase(),
                         )
                     )
                 )
@@ -90,14 +90,14 @@ class FillProfileFragment : FlowFragment<FillProfileComponent>(R.layout.fragment
                 binding.name.editText?.setText(firstName)
                 binding.surname.editText?.setText(lastName)
                 binding.date.editText?.setText(birthDate)
-                binding.sex.editText?.setText(sex.capitalized())
-                binding.preferredPartner.editText?.setText(preference.capitalized())
-                binding.intention.editText?.setText(intention.capitalized())
+                binding.sex.setText(sex.capitalized(), false)
+                binding.preferredPartner.setText(preference.capitalized(), false)
+                binding.intention.setText(intention.capitalized(), false)
                 binding.height.editText?.setText(height.toString())
-                binding.hasChildren.editText?.setText(if (hasChildren) "Yes" else "No")
-                binding.familyPlans.editText?.setText(familyPlans.capitalized())
-                binding.drinksAlcohol.editText?.setText(drinksAlcohol.capitalized())
-                binding.smokes.editText?.setText(smokes.capitalized())
+                binding.hasChildren.setText(if (hasChildren) "Yes" else "No", false)
+                binding.familyPlans.setText(familyPlans.capitalized(), false)
+                binding.drinksAlcohol.setText(drinksAlcohol.capitalized(), false)
+                binding.smokes.setText(smokes.capitalized(), false)
             }
         }
         binding.saveButton.setShowProgress(showProgress = state.isLoading)
